@@ -1,5 +1,4 @@
 # 3択ロースの皆さんのより良い選択を！
-<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
