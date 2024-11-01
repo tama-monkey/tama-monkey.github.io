@@ -36,6 +36,10 @@ h1 {
   background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
 }
 
+.selected {
+  animation: splash 0.5s ease-in-out;
+}
+
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
