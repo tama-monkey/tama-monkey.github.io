@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto; /* コンテナを中央に配置し、上部に余白を追加 */
+  padding: 20px;
+  background-color: #ffffff; /* コンテナに白い背景色を追加 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
+  border-radius: 8px; /* 角を丸くする */
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-align: center; /* タイトルを中央揃えに */
+}
+
+.choice-box {
+  margin: 12px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px; /* 角を丸く */
+  background-color: #f3f3f3;
+  cursor: pointer;
+  transition: background-color 0.3s; /* ホバー時の滑らかな効果 */
+}
+
+.choice-box:hover {
+  background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
+}
+
+#reset-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#reset-btn:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}
+
+#reset-btn:hover:not(:disabled) {
+  background-color: #c0392b; /* ホバー時に濃い赤に */
+}
+
+.section {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.skill-display {
+  font-size: 1.2em;
+  color: #555;
+}
