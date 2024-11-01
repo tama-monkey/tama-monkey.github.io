@@ -116,6 +116,7 @@ function getRandomChoices() {
         previousSelection = userSelections; // 現在の選択を保存
         resetButtonDisabledUntil = Date.now() + 1200;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
+        currentStepIndex++;
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
         }, 1200);
