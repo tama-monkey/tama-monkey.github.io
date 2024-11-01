@@ -87,20 +87,22 @@ function getRandomChoices() {
 
     // 選択肢を表示
     function displayChoices() {
-      const currentStep = steps[currentStepIndex];
-      document.getElementById("current-step").textContent = currentStep;
-      const choices = getRandomChoices();
+      if (currentStepIndex < 4) {
+        const currentStep = steps[currentStepIndex];
+        document.getElementById("current-step").textContent = currentStep;
+        const choices = getRandomChoices();
 
-      const choicesContainer = document.getElementById("choices");
-      choicesContainer.innerHTML = "";  // リセット
+        const choicesContainer = document.getElementById("choices");
+        choicesContainer.innerHTML = "";  // リセット
 
-      choices.forEach(choice => {
-        const choiceDiv = document.createElement("div");
-        choiceDiv.className = "choice-box";
-        choiceDiv.textContent = choice;
-        choiceDiv.onclick = () => selectChoice(choice);
-        choicesContainer.appendChild(choiceDiv);
-      });
+        choices.forEach(choice => {
+          const choiceDiv = document.createElement("div");
+          choiceDiv.className = "choice-box";
+          choiceDiv.textContent = choice;
+          choiceDiv.onclick = () => selectChoice(choice);
+          choicesContainer.appendChild(choiceDiv);
+        });
+      }
     }
 
     // 選択処理
