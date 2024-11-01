@@ -23,7 +23,7 @@
     let currentStepIndex = 0;
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
-    let resetButtonDisabledUntil = null; // リセットボタンの無効化管理
+    let resetButtonDisabledUntil = Date.now() + 1200000; // リセットボタンの無効化管理
     let canReset = false; // リセットボタンが押せるかどうかを管理
 
     // ダミーデータ（データベースから取得したものと仮定）
