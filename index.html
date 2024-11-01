@@ -185,7 +185,7 @@ function getRandomChoices() {
       const resetButton = document.getElementById("reset-btn");
       if (remainingTime > 120000) {
         resetButton.disabled = true;
-        resetButton.textContent = `リセット無効)`;
+        resetButton.textContent = `リセット`;
       } else if (remainingTime > 0) {
         resetButton.disabled = true;
         resetButton.textContent = `リセット (${Math.ceil(remainingTime / 1000)} 秒後に有効)`;
