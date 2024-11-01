@@ -19,7 +19,7 @@
 
   <script>
     // 各ステップの名前とデータ
-    const steps = ["ブキ", "アタマ", "フク", "クツ","次へ"];
+    const steps = ["ブキ", "アタマ", "フク", "クツ"];
     let currentStepIndex = 0;
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
@@ -66,9 +66,6 @@
         "インク効率アップ", "インク回復力アップ", "ヒト移動速度アップ", "イカダッシュ速度アップ", "スペシャル増加量アップ", 
         "スペシャル減少量ダウン", "スペシャル性能アップ", "復活時間短縮", "スーパージャンプ時間短縮", "サブ性能アップ", "相手インク影響軽減", 
         "サブ影響軽減", "アクション強化", "ステルスジャンプ", "対物攻撃力アップ", "受身術"
-      ],
-      "次へ": [
-        "","",""
       ]
     };
 
@@ -125,7 +122,7 @@ function getRandomChoices() {
         }, 1200);
       }
 
-      if (currentStepIndex < steps.length - 2) {
+      if (currentStepIndex < steps.length - 1) {
         currentStepIndex++;
         displayChoices();
       } else {
