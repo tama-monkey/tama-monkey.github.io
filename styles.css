@@ -1,77 +1,69 @@
-/* フォントのインポート */
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
-
-/* ベーススタイル */
 body {
   font-family: Arial, sans-serif;
-  background-color: #282c34; /* ダークグレーの背景 */
-  color: #fff;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  max-width: 700px;
-  margin: auto;
+  max-width: 600px;
+  margin: 50px auto; /* コンテナを中央に配置し、上部に余白を追加 */
   padding: 20px;
-  background-color: #1a1a1a;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  background-color: #ffffff; /* コンテナに白い背景色を追加 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
+  border-radius: 8px; /* 角を丸くする */
 }
 
-/* 見出しスタイル */
 h1 {
-  font-size: 2em;
-  text-align: center;
-  font-family: 'Bungee', cursive; /* ポップなフォント */
-  color: #ff4c9a; /* 蛍光ピンク */
-  text-shadow: 2px 2px #333; /* 文字の影 */
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-align: center; /* タイトルを中央揃えに */
 }
 
-/* 選択ボックススタイル */
 .choice-box {
-  margin: 10px 0;
+  margin: 12px 0;
   padding: 15px;
-  border-radius: 12px;
-  color: #1a1a1a;
-  background-color: #00d68f; /* 蛍光グリーン */
+  border: 1px solid #ddd;
+  border-radius: 6px; /* 角を丸く */
+  background-color: #f3f3f3;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
-  font-family: 'Bungee', cursive;
+  transition: background-color 0.3s; /* ホバー時の滑らかな効果 */
 }
 
 .choice-box:hover {
-  background-color: #ff4c9a; /* ホバーでピンクに変わる */
-  transform: scale(1.05); /* 少し大きくなる */
-  animation: splash 0.3s ease-in-out;
+  background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
 }
 
-/* 選択スキルの表示スタイル */
-.skill-display {
-  font-size: 1.2em;
-  color: #f39c12; /* 明るいオレンジ */
-  margin: 5px 0;
-}
-
-/* リセットボタンのスタイル */
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
-  font-size: 1.1em;
-  background-color: #f39c12; /* 明るいオレンジ */
+  background-color: #e74c3c;
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s;
 }
 
-#reset-btn:hover {
-  background-color: #e67e22; /* ホバー時に少し暗いオレンジに */
-  transform: scale(1.1); /* 少し大きくする */
+#reset-btn:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
 }
 
-/* アニメーション */
-@keyframes splash {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); }
+#reset-btn:hover:not(:disabled) {
+  background-color: #c0392b; /* ホバー時に濃い赤に */
+}
+
+.section {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.skill-display {
+  font-size: 1.2em;
+  color: #555;
 }
