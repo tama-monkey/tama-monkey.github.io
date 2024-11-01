@@ -34,6 +34,7 @@ h1 {
 
 .choice-box:hover {
   background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
+  animation: splash 0.3s ease-in-out;
 }
 
 #reset-btn {
