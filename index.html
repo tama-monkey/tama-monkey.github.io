@@ -118,7 +118,7 @@ function getRandomChoices() {
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
-        }, 120000);
+        }, 1200);
       }
 
       if (currentStepIndex < steps.length - 1) {
@@ -169,14 +169,14 @@ function getRandomChoices() {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
         currentStepIndex = 0;
+        previousSelection = userSelections; // リセット時に前の選択を保持
         userSelections = {};  // ユーザーの選択をクリア
         displayChoices();
         // 選択したスキルの表示を更新
         updateSelectionsDisplay();
-        previousSelection = { ...userSelections }; // リセット時に前の選択を保持
         canReset = false;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
-        resetButtonDisabledUntil = null;
+        resetButtonDisabledUntil = Date.now() + 12000000;
       }
     };
 
