@@ -13,6 +13,7 @@ body {
   background-color: #ffffff; /* コンテナに白い背景色を追加 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
   border-radius: 8px; /* 角を丸くする */
+  transition: opacity 0.5s;
 }
 
 h1 {
@@ -77,4 +78,17 @@ h1 {
   0% { transform: scale(0.5); opacity: 0; }
   50% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s forwards;
 }
