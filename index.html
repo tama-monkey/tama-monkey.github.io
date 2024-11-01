@@ -24,6 +24,7 @@
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
     let resetButtonDisabledUntil = null; // リセットボタンの無効化管理
+    let canReset = false; // リセットボタンが押せるかどうかを管理
 
     // ダミーデータ（データベースから取得したものと仮定）
     const database = {
@@ -114,6 +115,7 @@ function getRandomChoices() {
       if (currentStep === "クツ") {
         previousSelection = userSelections; // 現在の選択を保存
         resetButtonDisabledUntil = Date.now() + 120000; // 120秒後
+        canReset = true; // リセットボタンを押せるようにする
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
@@ -173,6 +175,7 @@ function getRandomChoices() {
         // 選択したスキルの表示を更新
         updateSelectionsDisplay();
         previousSelection = { ...userSelections }; // リセット時に前の選択を保持
+        canReset = false;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         resetButtonDisabledUntil = null;
       }
