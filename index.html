@@ -185,8 +185,8 @@ function getRandomChoices() {
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("choices").disabled = false;
           resetButtonDisabledUntil = Date.now() + 12000000;
-          container.classList.remove('fade-out');
           container.classList.add('fade-in');
+          container.classList.remove('fade-in');
         },500);
       }
     };
