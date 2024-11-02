@@ -138,6 +138,20 @@ function getRandomChoices() {
       const container = document.getElementById("selections-container");
       container.innerHTML = "";  // 以前の内容をクリア
 
+      // 現在の選択スキルを表示
+      let currentSection = document.createElement("div");
+      currentSection.className = "section";
+      currentSection.textContent = "現在の選択:";
+      container.appendChild(currentSection);
+
+      for (const step of steps) {
+        const choice = userSelections[step] || "未選択";
+        const skillDiv = document.createElement("div");
+        skillDiv.className = "skill-display"; // 文字サイズを適用
+        skillDiv.textContent = `${step}: ${choice}`;
+        currentSection.appendChild(skillDiv);
+      }
+
       // リセット前の選択スキルがあれば表示
       if (previousSelection) {
         let prevSection = document.createElement("div");
@@ -151,20 +165,6 @@ function getRandomChoices() {
           skillDiv.textContent = `${step}: ${choice}`;
           prevSection.appendChild(skillDiv);
         }
-      }
-
-      // 現在の選択スキルを表示
-      let currentSection = document.createElement("div");
-      currentSection.className = "section";
-      currentSection.textContent = "現在の選択:";
-      container.appendChild(currentSection);
-
-      for (const step of steps) {
-        const choice = userSelections[step] || "未選択";
-        const skillDiv = document.createElement("div");
-        skillDiv.className = "skill-display"; // 文字サイズを適用
-        skillDiv.textContent = `${step}: ${choice}`;
-        currentSection.appendChild(skillDiv);
       }
     }
 
