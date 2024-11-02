@@ -116,13 +116,13 @@ function getRandomChoices() {
       // リセットボタンの無効化を管理
       if (currentStep === "クツ") {
         previousSelection = userSelections; // 現在の選択を保存
-        resetButtonDisabledUntil = Date.now() + 1200;
+        resetButtonDisabledUntil = Date.now() + 120000;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         document.getElementById("choices").disabled = true;
         currentStepIndex++;
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
-        }, 1200);
+        }, 120000);
       }
 
       if (currentStepIndex < steps.length - 1) {
