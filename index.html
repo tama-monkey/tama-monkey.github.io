@@ -173,9 +173,6 @@ function getRandomChoices() {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
         const container = document.querySelector('.container');
-        currentStepIndex = 0;
-        previousSelection = userSelections; // リセット時に前の選択を保持
-        userSelections = {};  // ユーザーの選択をクリア
         updateSelectionsDisplay();
         // 選択したスキルの表示を更新
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
@@ -208,6 +205,9 @@ function getRandomChoices() {
       // スライドアウトが終わるまで待機
       setTimeout(() => {
         displayChoices();
+        currentStepIndex = 0;
+        previousSelection = userSelections; // リセット時に前の選択を保持
+        userSelections = {};  // ユーザーの選択をクリア
         container.classList.add('bounce-in');
       }, 250); // スライドアウトの時間に合わせて待機
       
