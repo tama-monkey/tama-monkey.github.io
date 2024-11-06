@@ -48,11 +48,12 @@ h1 {
 }
 
 #reset-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
+  font-size: 50px;
+  margin: 40px;
+  padding: 30px 30px;
   background-color: #e74c3c;
   color: #fff;
-  border: none;
+  border: 1px solid #c0392b;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
