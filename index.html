@@ -172,7 +172,6 @@ function getRandomChoices() {
     document.getElementById("reset-btn").onclick = () => {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
-        const container = document.querySelector('.container');
         updateSelectionsDisplay();
         // 選択したスキルの表示を更新
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
