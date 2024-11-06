@@ -11,7 +11,7 @@
     <h1>スキル選択</h1>
     <div id="step">現在のステップ：<span id="current-step">ブキ</span></div>
     <div id="choices"></div>
-    <button id="reset-btn" disabled>リセット</button> <!-- 初期は無効化 -->
+    <button id="reset-btn" disabled display='none'>リセット</button> <!-- 初期は無効化 -->
 
     <h2>選んだスキル</h2>
     <div id="selections-container"></div>
@@ -118,6 +118,7 @@ function getRandomChoices() {
         previousSelection = userSelections; // 現在の選択を保存
         resetButtonDisabledUntil = Date.now() + coolTime;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
+        document.getElementById("reset-btn").style.display = 'block';
         document.getElementById("choices").style.display = 'none';
         currentStepIndex++;
         setTimeout(() => {
@@ -173,6 +174,7 @@ function getRandomChoices() {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
         // 選択したスキルの表示を更新
+        document.getElementById("reset-btn").style.display = 'none';
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         resetButtonDisabledUntil = Date.now() + 12000000;
         resetSelections();
