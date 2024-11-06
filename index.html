@@ -173,8 +173,6 @@ function getRandomChoices() {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
         const container = document.querySelector('.container');
-        container.classList.add('fade-out');
-        container.classList.remove('fade-in');
         setTimeout(() => {
           currentStepIndex = 0;
           previousSelection = userSelections; // リセット時に前の選択を保持
@@ -186,8 +184,7 @@ function getRandomChoices() {
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("choices").disabled = false;
           resetButtonDisabledUntil = Date.now() + 12000000;
-          container.classList.add('fade-in');
-          container.classList.remove('fade-out');
+          resetSelections();
         },500);
       }
     };
@@ -205,6 +202,39 @@ function getRandomChoices() {
         resetButton.disabled = false;
         resetButton.textContent = "リセット";
       }
+    }
+
+    function resetSelections() {
+      // コンテナをスライドアウト
+      const container = document.querySelector('.container');
+      container.classList.add('slide-out');
+
+      // スライドアウトが終わるまで待機
+      setTimeout(() => {
+        currentStepIndex = 0;
+        userSelections = {};
+        previousSelection = null;
+
+        document.getElementById("current-step").innerText = steps[currentStepIndex];
+
+        const choicesDiv = document.getElementById("choices");
+        choicesDiv.innerHTML = '';
+        displayChoices();
+
+        const selectionsContainer = document.getElementById("selections-container");
+        selectionsContainer.innerHTML = '';
+
+        // カラフルなフラッシュ効果
+        container.classList.remove('slide-out');
+        container.classList.add('flash-bg'); 
+
+        // 一瞬後にスライドインとバウンスを適用
+        setTimeout(() => {
+          container.classList.remove('flash-bg');
+          container.classList.add('slide-in', 'bounce-in');
+        }, 300);
+
+      }, 500); // スライドアウトの時間に合わせて待機
     }
 
     setInterval(updateResetButtonCountdown, 1000);
