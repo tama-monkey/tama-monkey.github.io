@@ -214,6 +214,8 @@ function getRandomChoices() {
         container.classList.remove('slide-out');
         container.classList.add('bounce-in');
       }, 500); // スライドアウトの時間に合わせて待機
+
+      container.classList.remove('bounce-in');
     }
 
     setInterval(updateResetButtonCountdown, 1000);
