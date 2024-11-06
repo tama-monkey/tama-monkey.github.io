@@ -24,7 +24,7 @@
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
     let resetButtonDisabledUntil = Date.now() + 12000000; // リセットボタンの無効化管理
-    let canReset = false; // リセットボタンが押せるかどうかを管理
+    let coolTime = 2000; // リセットボタンのクールタイム(ms)
 
     // ダミーデータ（データベースから取得したものと仮定）
     const database = {
@@ -116,13 +116,13 @@ function getRandomChoices() {
       // リセットボタンの無効化を管理
       if (currentStep === "クツ") {
         previousSelection = userSelections; // 現在の選択を保存
-        resetButtonDisabledUntil = Date.now() + 120000;
+        resetButtonDisabledUntil = Date.now() + coolTime;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         document.getElementById("choices").disabled = true;
         currentStepIndex++;
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
-        }, 120000);
+        }, coolTime);
       }
 
       if (currentStepIndex < steps.length - 1) {
