@@ -49,8 +49,9 @@ h1 {
 
 #reset-btn {
   width: 450px;
+  height: 90px;
   margin: 50px;
-  padding: 35px 20px;
+  padding: 20px;
   background-color: #e74c3c;
   color: #fff;
   border: 1px solid #c0392b;
