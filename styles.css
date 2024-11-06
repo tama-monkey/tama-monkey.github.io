@@ -41,6 +41,12 @@ h1 {
   animation: splash 0.5s ease-in-out;
 }
 
+#choices:disabled {
+  background-color: #f3f3f3;
+  color: #f3f3f3;
+  cursor: not-allowed;
+}
+
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
