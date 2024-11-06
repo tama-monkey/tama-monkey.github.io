@@ -211,10 +211,10 @@ function getRandomChoices() {
 
       // スライドアウトが終わるまで待機
       setTimeout(() => {
-        container.classList.remove('slide-out');
         container.classList.add('bounce-in');
-      }, 500); // スライドアウトの時間に合わせて待機
-
+      }, 250); // スライドアウトの時間に合わせて待機
+      
+      container.classList.remove('slide-out');
       container.classList.remove('bounce-in');
     }
 
