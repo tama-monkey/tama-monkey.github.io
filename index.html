@@ -174,7 +174,6 @@ function getRandomChoices() {
       if (confirmReset) {
         // 選択したスキルの表示を更新
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
-        document.getElementById("choices").style.display = 'block';
         resetButtonDisabledUntil = Date.now() + 12000000;
         resetSelections();
       }
@@ -206,6 +205,7 @@ function getRandomChoices() {
         previousSelection = userSelections; // リセット時に前の選択を保持
         userSelections = {};  // ユーザーの選択をクリア
         displayChoices();
+        document.getElementById("choices").style.display = 'block';
         updateSelectionsDisplay();
         container.classList.add('bounce-in');
       }, 250); // スライドアウトの時間に合わせて待機
