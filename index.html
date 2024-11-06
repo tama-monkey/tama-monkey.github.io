@@ -202,11 +202,11 @@ function getRandomChoices() {
       container.classList.add('slide-out');
 
       // スライドアウトが終わるまで待機
-      setTimeout(() => {
-        displayChoices();
+      setTimeout(() => { 
         currentStepIndex = 0;
         previousSelection = userSelections; // リセット時に前の選択を保持
         userSelections = {};  // ユーザーの選択をクリア
+        displayChoices();
         container.classList.add('bounce-in');
       }, 250); // スライドアウトの時間に合わせて待機
       
