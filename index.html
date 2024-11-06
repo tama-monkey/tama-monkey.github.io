@@ -173,19 +173,17 @@ function getRandomChoices() {
       const confirmReset = confirm("リセットしてもよろしいですか？選択内容がクリアされます。");
       if (confirmReset) {
         const container = document.querySelector('.container');
-        setTimeout(() => {
-          currentStepIndex = 0;
-          previousSelection = userSelections; // リセット時に前の選択を保持
-          userSelections = {};  // ユーザーの選択をクリア
-          displayChoices();
-          // 選択したスキルの表示を更新
-          updateSelectionsDisplay();
-          canReset = false;
-          document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
-          document.getElementById("choices").disabled = false;
-          resetButtonDisabledUntil = Date.now() + 12000000;
-          resetSelections();
-        },500);
+        currentStepIndex = 0;
+        previousSelection = userSelections; // リセット時に前の選択を保持
+        userSelections = {};  // ユーザーの選択をクリア
+        displayChoices();
+        // 選択したスキルの表示を更新
+        updateSelectionsDisplay();
+        canReset = false;
+        document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
+        document.getElementById("choices").disabled = false;
+        resetButtonDisabledUntil = Date.now() + 12000000;
+        resetSelections();
       }
     };
 
