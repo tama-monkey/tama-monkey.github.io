@@ -177,7 +177,6 @@ function getRandomChoices() {
         previousSelection = userSelections; // リセット時に前の選択を保持
         userSelections = {};  // ユーザーの選択をクリア
         updateSelectionsDisplay();
-        displayChoices();
         // 選択したスキルの表示を更新
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         document.getElementById("choices").disabled = false;
@@ -208,6 +207,7 @@ function getRandomChoices() {
 
       // スライドアウトが終わるまで待機
       setTimeout(() => {
+        displayChoices();
         container.classList.add('bounce-in');
       }, 250); // スライドアウトの時間に合わせて待機
       
