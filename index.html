@@ -211,26 +211,11 @@ function getRandomChoices() {
 
       // スライドアウトが終わるまで待機
       setTimeout(() => {
-        currentStepIndex = 0;
-        userSelections = {};
-        previousSelection = null;
-
-        document.getElementById("current-step").innerText = steps[currentStepIndex];
-
-        const choicesDiv = document.getElementById("choices");
-        choicesDiv.innerHTML = '';
-        displayChoices();
-
-        const selectionsContainer = document.getElementById("selections-container");
-        selectionsContainer.innerHTML = '';
-
-        // カラフルなフラッシュ効果
+                // カラフルなフラッシュ効果
         container.classList.remove('slide-out');
-        container.classList.add('flash-bg'); 
 
         // 一瞬後にスライドインとバウンスを適用
         setTimeout(() => {
-          container.classList.remove('flash-bg');
           container.classList.add('slide-in', 'bounce-in');
         }, 300);
 
