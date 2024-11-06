@@ -41,7 +41,7 @@ h1 {
   animation: splash 0.5s ease-in-out;
 }
 
-#choices:disabled {
+.choice-box:disabled {
   background-color: #f3f3f3;
   color: #f3f3f3;
   cursor: not-allowed;
