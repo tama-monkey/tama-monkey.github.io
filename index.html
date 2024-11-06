@@ -176,10 +176,9 @@ function getRandomChoices() {
         currentStepIndex = 0;
         previousSelection = userSelections; // リセット時に前の選択を保持
         userSelections = {};  // ユーザーの選択をクリア
+        updateSelectionsDisplay();
         displayChoices();
         // 選択したスキルの表示を更新
-        updateSelectionsDisplay();
-        canReset = false;
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
         document.getElementById("choices").disabled = false;
         resetButtonDisabledUntil = Date.now() + 12000000;
