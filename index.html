@@ -211,14 +211,8 @@ function getRandomChoices() {
 
       // スライドアウトが終わるまで待機
       setTimeout(() => {
-                // カラフルなフラッシュ効果
         container.classList.remove('slide-out');
-
-        // 一瞬後にスライドインとバウンスを適用
-        setTimeout(() => {
-          container.classList.add('bounce-in');
-        }, 300);
-
+        container.classList.add('bounce-in');
       }, 500); // スライドアウトの時間に合わせて待機
     }
 
