@@ -27,7 +27,7 @@
     let resetButtonDisabledUntil = Date.now() + 12000000; // リセットボタンの無効化管理
     let coolTime = 2000; // リセットボタンのクールタイム(ms)
 
-    // ダミーデータ（データベースから取得したものと仮定）
+    // データ
     const database = {
       "ブキ": [
         "ボールドマーカー", "ボールドマーカーネオ", "わかばシューター", "もみじシューター", "シャープマーカー", "シャープマーカーネオ", 
@@ -100,21 +100,21 @@ function getRandomChoices() {
           const choiceDiv = document.createElement("div");
           choiceDiv.className = "choice-box";
           choiceDiv.textContent = choice;
-          choiceDiv.onclick = () => selectChoice(choice);
+          choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
           choicesContainer.appendChild(choiceDiv);
         });
       }
     }
 
     // 選択処理
-    function selectChoice(choice) {
+    function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
 
-      choice.classList.add('slide-out');
+      choiceDiv.classList.add('slide-out');
 
       setTimeout(() => { 
-        choice.classList.remove('slide-out');
+        choiceDiv.classList.remove('slide-out');
         // 選択したスキルを表に追加
         updateSelectionsDisplay();
   
