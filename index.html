@@ -71,20 +71,20 @@
     };
 
 
-   // ランダムに3つの選択肢を生成
-function getRandomChoices() {
-  const currentStep = steps[currentStepIndex];
-  const items = database[currentStep];
-  const unselectedItems = items.filter(item => !userSelections[currentStep]?.includes(item)); // 選ばれたものを除外
-
-  // シャッフル処理
-  for (let i = unselectedItems.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [unselectedItems[i], unselectedItems[j]] = [unselectedItems[j], unselectedItems[i]];
-  }
-
-  return unselectedItems.slice(0, 3); // 最初の3つを取得
-}
+    // ランダムに3つの選択肢を生成
+    function getRandomChoices() {
+      const currentStep = steps[currentStepIndex];
+      const items = database[currentStep];
+      const unselectedItems = items.filter(item => !userSelections[currentStep]?.includes(item)); // 選ばれたものを除外
+    
+      // シャッフル処理
+      for (let i = unselectedItems.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [unselectedItems[i], unselectedItems[j]] = [unselectedItems[j], unselectedItems[i]];
+      }
+    
+      return unselectedItems.slice(0, 3); // 最初の3つを取得
+    }
 
     // 選択肢を表示
     function displayChoices() {
@@ -98,10 +98,15 @@ function getRandomChoices() {
 
         choices.forEach(choice => {
           const choiceDiv = document.createElement("div");
-          choiceDiv.className = "choice-box";
+          choiceDiv.className = "choice-box bounce-in";
           choiceDiv.textContent = choice;
           choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
           choicesContainer.appendChild(choiceDiv);
+          choicesContainer.querySelectorAll('.choice-box').forEach(box => {
+            box.addEventListener('animationend', () => {
+              box.classList.remove('bounce-in');
+            });
+          });
         });
       }
     }
