@@ -110,6 +110,7 @@ function getRandomChoices() {
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
+      document.getElementById("choice-box").disabled = true;
 
       choiceDiv.classList.add('slide-out');
 
@@ -125,6 +126,7 @@ function getRandomChoices() {
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("reset-btn").style.display = 'block';
           document.getElementById("choices").style.display = 'none';
+          document.getElementById("choice-box").disabled = false;
           currentStepIndex++;
           setTimeout(() => {
             document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
