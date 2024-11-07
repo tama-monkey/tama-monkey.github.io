@@ -117,6 +117,14 @@ function getRandomChoices() {
         box.style.pointerEvents = "none";
       });
 
+      // 選ばれていない選択肢にフェードアウトクラスを追加
+      document.querySelectorAll('.choice-box').forEach(box => {
+        if (box !== choiceDiv) {
+          box.classList.add('fade-out');
+        }
+      });
+    
+      // 選ばれた選択肢にはスライドアウトアニメーションを適用
       choiceDiv.classList.add('slide-out');
 
       setTimeout(() => { 
@@ -142,7 +150,14 @@ function getRandomChoices() {
         } else {
           alert("すべてのスキルを選択しました！\n" + JSON.stringify(userSelections, null, 2));
         }
+
+        // フェードアウトした選択肢を非表示にする
+        document.querySelectorAll('.choice-box.fade-out').forEach(box => {
+          box.style.display = "none";
+          box.classList.remove('fade-out'); // 次の選択に備えてクラスをリセット
+        });
         
+        // 選択肢がスライドアウトした後、すべてのchoice-boxを再度クリック可能にする
         document.querySelectorAll('.choice-box').forEach(box => {
           box.style.pointerEvents = "auto";
         });
