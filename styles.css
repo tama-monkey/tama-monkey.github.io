@@ -95,7 +95,7 @@ h1 {
 
 .fade-out {
   opacity: 0;
-  transition: opacity 0.5s forwards;
+  transition: opacity 0.5s ease;
 }
 
 .fade-in {
