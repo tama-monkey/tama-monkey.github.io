@@ -111,29 +111,35 @@ function getRandomChoices() {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
 
-      // 選択したスキルを表に追加
-      updateSelectionsDisplay();
+      choice.classList.add('slide-out');
 
-      // リセットボタンの無効化を管理
-      if (currentStep === "クツ") {
-        previousSelection = userSelections; // 現在の選択を保存
-        resetButtonDisabledUntil = Date.now() + coolTime;
-        document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
-        document.getElementById("reset-btn").style.display = 'block';
-        document.getElementById("choices").style.display = 'none';
-        currentStepIndex++;
-        setTimeout(() => {
-          document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
-        }, coolTime);
-      }
-
-      if (currentStepIndex < steps.length - 1) {
-        currentStepIndex++;
-        displayChoices();
-      } else {
-        alert("すべてのスキルを選択しました！\n" + JSON.stringify(userSelections, null, 2));
-      }
+      setTimeout(() => { 
+        choice.classList.remove('slide-out');
+        // 選択したスキルを表に追加
+        updateSelectionsDisplay();
+  
+        // リセットボタンの無効化を管理
+        if (currentStep === "クツ") {
+          previousSelection = userSelections; // 現在の選択を保存
+          resetButtonDisabledUntil = Date.now() + coolTime;
+          document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
+          document.getElementById("reset-btn").style.display = 'block';
+          document.getElementById("choices").style.display = 'none';
+          currentStepIndex++;
+          setTimeout(() => {
+            document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
+          }, coolTime);
+        }
+  
+        if (currentStepIndex < steps.length - 1) {
+          currentStepIndex++;
+          displayChoices();
+        } else {
+          alert("すべてのスキルを選択しました！\n" + JSON.stringify(userSelections, null, 2));
+        }
+      }, 500); // スライドアウトの時間に合わせて待機
     }
+      
 
     // 選択したスキルを表示
     function updateSelectionsDisplay() {
