@@ -110,16 +110,18 @@ function getRandomChoices() {
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
+      // 選択したスキルを表に追加
+      updateSelectionsDisplay();
+      
       document.querySelectorAll('.choice-box').forEach(box => {
-      box.style.pointerEvents = "none";
-    });
+        box.style.pointerEvents = "none";
+      });
 
       choiceDiv.classList.add('slide-out');
 
       setTimeout(() => { 
         choiceDiv.classList.remove('slide-out');
-        // 選択したスキルを表に追加
-        updateSelectionsDisplay();
+        
   
         // リセットボタンの無効化を管理
         if (currentStep === "クツ") {
