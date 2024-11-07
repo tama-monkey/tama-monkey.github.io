@@ -94,7 +94,8 @@ h1 {
 }
 
 .fade-out {
-  animation: fadeOut 0.5s forwards;
+  opacity: 0;
+  transition: opacity 0.5s forwards;
 }
 
 .fade-in {
