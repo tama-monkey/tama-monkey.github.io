@@ -110,7 +110,9 @@ function getRandomChoices() {
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
-      choiceDiv.style.pointerEvents = "none";
+      document.querySelectorAll('.choice-box').forEach(box => {
+      box.style.pointerEvents = "none";
+    });
 
       choiceDiv.classList.add('slide-out');
 
@@ -126,7 +128,6 @@ function getRandomChoices() {
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("reset-btn").style.display = 'block';
           document.getElementById("choices").style.display = 'none';
-          choiceDiv.style.pointerEvents = "block";
           currentStepIndex++;
           setTimeout(() => {
             document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
@@ -139,6 +140,10 @@ function getRandomChoices() {
         } else {
           alert("すべてのスキルを選択しました！\n" + JSON.stringify(userSelections, null, 2));
         }
+        
+        document.querySelectorAll('.choice-box').forEach(box => {
+          box.style.pointerEvents = "auto";
+        });
       }, 500); // スライドアウトの時間に合わせて待機
     }
       
