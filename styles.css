@@ -29,8 +29,6 @@ h1 {
 }
 
 .choice-box {
-  --convexity: 5;
-  --metal: neutral;
   margin: 12px 0;
   padding: 15px;
   border: 2px solid #ddd;
