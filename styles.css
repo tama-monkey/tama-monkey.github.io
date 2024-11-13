@@ -7,7 +7,7 @@ body {
 }
 
 .metallicss {
-  --convexity: 5;
+  --convexity: 2;
   --metal: neutral;
 }
 
