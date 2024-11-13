@@ -24,13 +24,15 @@ h1 {
 }
 
 .choice-box {
+  --convexity: 5;
+  --metal: neutral;
   margin: 12px 0;
   padding: 15px;
   border: 2px solid #ddd;
-  border-radius: 12px; /* 角を丸く */
-  background-color: #f3f3f3;
+  border-radius: 12px;
+  background: #f3f3f3;
   cursor: pointer;
-  transition: background-color 0.3s; /* ホバー時の滑らかな効果 */
+  transition: background-color 0.3s;
 }
 
 .choice-box:hover {
