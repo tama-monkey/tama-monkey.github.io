@@ -75,7 +75,6 @@ h1 {
 #reset-btn:disabled {
   color: #999;
   cursor: not-allowed;
-  background: #ddd;
 }
 
 #reset-btn:hover:not(:disabled) {
