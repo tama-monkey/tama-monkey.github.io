@@ -9,12 +9,6 @@ body {
 .metallicss {
   --convexity: 5;
   --metal: neutral;
-  border-radius: 30px;
-  width: 450px;
-  height: 90px;
-  margin: 50px;
-  padding: 20px;
-  background: #e74c3c;
 }
 
 .container {
@@ -66,6 +60,7 @@ h1 {
   margin: 50px;
   padding: 20px;
   color: #fff;
+  background: #e74c3c;
   border: 1px solid #c0392b;
   border-radius: 6px;
   cursor: pointer;
@@ -75,6 +70,7 @@ h1 {
 #reset-btn:disabled {
   color: #999;
   cursor: not-allowed;
+  background: #ddd;
 }
 
 #reset-btn:hover:not(:disabled) {
