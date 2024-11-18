@@ -59,6 +59,7 @@ h1 {
   padding: 20px;
   color: #fff;
   background: #e74c3c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #c0392b;
   border-radius: 6px;
   cursor: pointer;
