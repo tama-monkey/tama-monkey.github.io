@@ -14,7 +14,6 @@
     <div id="step">現在のステップ：<span id="current-step">ブキ</span></div>
     <div id="choices"></div>
     <button id="reset-btn" disabled>リセット</button> <!-- 初期は無効化 -->
-    <div class="metallicss"></div>
 
     <h2>選んだスキル</h2>
     <div id="selections-container"></div>
@@ -101,7 +100,7 @@
 
         choices.forEach(choice => {
           const choiceDiv = document.createElement("div");
-          choiceDiv.className = "choice-box metallicss bounce-in";
+          choiceDiv.className = "choice-box bounce-in";
           choiceDiv.textContent = choice;
           choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
           choicesContainer.appendChild(choiceDiv);
