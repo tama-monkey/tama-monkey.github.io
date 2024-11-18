@@ -6,6 +6,9 @@
   background-color: #2c3e50;
   padding: 10px 20px;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 9999; /* 常に最前面に表示 */
 }
 
 .menu-icon {
@@ -28,6 +31,7 @@
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* 最前面に表示 */
 }
 
 .nav-menu.active {
@@ -72,6 +76,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
   border-radius: 8px; /* 角を丸くする */
   transition: opacity 0.5s;
+  position: relative;
+  z-index: 1; /* メニューよりも低い値に設定 */
 }
 
 h1 {
