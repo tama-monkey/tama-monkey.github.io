@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #2c3e50;
   padding: 10px 20px;
+  position: relative;
 }
 
 .menu-icon {
@@ -13,11 +14,23 @@
   color: #fff;
 }
 
+/* ナビゲーションメニューの初期設定 */
 .nav-menu {
   list-style: none;
   padding: 0;
   margin: 0;
   display: none; /* デフォルトでは非表示 */
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #2c3e50;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu.active {
+  display: block; /* メニューアイコンがクリックされたときに表示 */
 }
 
 .nav-menu li {
@@ -36,28 +49,6 @@
   background-color: #34495e;
 }
 
-/* モバイル用のハンバーガーメニューのスタイル */
-.nav-menu.active {
-  display: block;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: #2c3e50;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 768px) {
-  .nav-menu {
-    display: flex;
-    gap: 15px;
-    position: static;
-  }
-  .menu-icon {
-    display: none; /* デスクトップでは非表示 */
-  }
-}
 
 body {
   font-family: Arial, sans-serif;
