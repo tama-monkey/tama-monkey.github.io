@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スキル選択</title>
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="https://unpkg.com/metallicss@4.0.3/dist/metallicss.min.js"></script> 
 </head>
 
 <body>
@@ -31,11 +30,7 @@
   </div>
 
   <script>
-    document.getElementById("menu-icon").addEventListener("click", function() {
-      const navMenu = document.getElementById("nav-menu");
-      navMenu.classList.toggle("active");
-    });
-
+    
     document.getElementById("reset-btn").style.display = 'none';
     // 各ステップの名前とデータ
     const steps = ["ブキ", "アタマ", "フク", "クツ"];
