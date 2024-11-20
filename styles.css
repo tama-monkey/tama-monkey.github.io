@@ -6,11 +6,6 @@ body {
   padding: 0;
 }
 
-.metallicss {
-  --convexity: 2;
-  --metal: neutral;
-}
-
 .container {
   max-width: 600px;
   margin: 50px auto; /* コンテナを中央に配置し、上部に余白を追加 */
