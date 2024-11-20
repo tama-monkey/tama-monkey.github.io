@@ -47,7 +47,7 @@ section {
 }
 
 h3 {
-  color: #ff6347;
+  color: #2c3e50;
 }
 
 #random-button {
@@ -87,7 +87,7 @@ h3 {
 h2 {
   font-size: 1.8em;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #ff6347;
   text-align: center; /* タイトルを中央揃えに */
 }
 
