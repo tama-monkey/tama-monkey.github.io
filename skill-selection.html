@@ -90,16 +90,11 @@
     };
 
     // セッションストレージからステージ情報を読み込む
-    function loadSkills() {
-      const savedSkills = sessionStorage.getItem('selectedSkills');
-      if (savedSklls) {
-        const parsedSkills = JSON.parse(savedSkills);
-        skillDisplay.innerHTML = `
-          <p>ブキ: ${parsedSkills[0]}</p>
-          <p>アタマ: ${parsedSkills[1]}</p>
-          <p>フク: ${parsedSkills[2]}</p>
-          <p>クツ: ${parsedSkills[3]}</p>
-        `;
+    function loadPreviousSelections() {
+      const savedPreviousSelection = sessionStorage.getItem('previousSelection');
+      if (savedPreviousSelection) {
+        previousSelection = JSON.parse(savedPreviousSelection); // セッションストレージから取得
+        updateSelectionsDisplay(); // リセット前の選択を表示
       }
     }
 
@@ -277,6 +272,7 @@
         document.getElementById("reset-btn").style.display = 'none';
         currentStepIndex = 0;
         previousSelection = userSelections; // リセット時に前の選択を保持
+        sessionStorage.setItem('previousSelection', JSON.stringify(previousSelection)); // セッションストレージに保存
         userSelections = {};  // ユーザーの選択をクリア
         displayChoices();
         document.getElementById("choices").style.display = 'block';
@@ -291,6 +287,7 @@
     setInterval(updateResetButtonCountdown, 1000);
 
     // 初期化
+    loadPreviousSelections();
     displayChoices();
   </script>
 </body>
