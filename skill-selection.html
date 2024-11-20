@@ -39,6 +39,7 @@
     document.getElementById("reset-btn").style.display = 'none';
     // 各ステップの名前とデータ
     const steps = ["ブキ", "アタマ", "フク", "クツ"];
+    const skillDisplay = document.getElementById('selections-container');
     let currentStepIndex = 0;
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
@@ -88,6 +89,19 @@
       ]
     };
 
+    // セッションストレージからステージ情報を読み込む
+    function loadStages() {
+      const savedSkills = sessionStorage.getItem('selectedSkills');
+      if (savedSklls) {
+        const parsedSkills = JSON.parse(savedSkills);
+        skillDisplay.innerHTML = `
+          <p>ブキ: ${parsedSkills[0]}</p>
+          <p>アタマ: ${parsedSkills[1]}</p>
+          <p>フク: ${parsedSkills[2]}</p>
+          <p>クツ: ${parsedSkills[3]}</p>
+        `;
+      }
+    }
 
     // ランダムに3つの選択肢を生成
     function getRandomChoices() {
@@ -133,6 +147,10 @@
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
+      if (!selectedSkills.includes(userSelections)) {
+        selectedStages.push(userSelections);
+      }
+      
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
       
