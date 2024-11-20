@@ -89,16 +89,6 @@
       ]
     };
 
-    // セッションストレージからステージ情報を読み込む
-    function loadSkills() {
-      const savedSkills = sessionStorage.getItem('selectedSkills');
-      if (savedSkills) {
-        const parsedSkills = JSON.parse(savedSkills);
-        for (const step of steps) {
-          const previousSelection[step] = parsedSkills[step];
-        }
-      }
-    }
 
 
     // ランダムに3つの選択肢を生成
