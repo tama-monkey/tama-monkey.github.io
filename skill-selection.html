@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -89,7 +90,19 @@
       ]
     };
 
-
+    // セッションストレージからステージ情報を読み込む
+    function loadSkills() {
+      const savedSkills = sessionStorage.getItem('selectedSkills');
+      if (savedSklls) {
+        const parsedSkills = JSON.parse(savedSkills);
+        skillDisplay.innerHTML = `
+          <p>ブキ: ${parsedSkills[0]}</p>
+          <p>アタマ: ${parsedSkills[1]}</p>
+          <p>フク: ${parsedSkills[2]}</p>
+          <p>クツ: ${parsedSkills[3]}</p>
+        `;
+      }
+    }
 
     // ランダムに3つの選択肢を生成
     function getRandomChoices() {
@@ -160,9 +173,6 @@
         // リセットボタンの無効化を管理
         if (currentStep === "クツ") {
           previousSelection = userSelections; // 現在の選択を保存
-          if (!selectedSkills.includes(previousSelection)) {
-            selectedSkills.push(previousSelection);
-          }
           resetButtonDisabledUntil = Date.now() + coolTime;
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("reset-btn").style.display = 'block';
@@ -226,7 +236,7 @@
           skillDiv.textContent = `${step}: ${choice}`;
           prevSection.appendChild(skillDiv);
         }
-      } 
+      }
     }
 
     // リセット機能
