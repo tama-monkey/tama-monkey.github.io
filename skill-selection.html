@@ -90,7 +90,7 @@
     };
 
     // セッションストレージからステージ情報を読み込む
-    function loadStages() {
+    function loadSkills() {
       const savedSkills = sessionStorage.getItem('selectedSkills');
       if (savedSklls) {
         const parsedSkills = JSON.parse(savedSkills);
@@ -147,9 +147,6 @@
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
-      if (!selectedSkills.includes(userSelections)) {
-        selectedStages.push(userSelections);
-      }
       
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
