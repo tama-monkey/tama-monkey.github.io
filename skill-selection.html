@@ -94,12 +94,9 @@
       const savedSkills = sessionStorage.getItem('selectedSkills');
       if (savedSkills) {
         const parsedSkills = JSON.parse(savedSkills);
-        skillDisplay.innerHTML = `
-          <p>ブキ: ${parsedSkills[0]}</p>
-          <p>アタマ: ${parsedSkills[1]}</p>
-          <p>フク: ${parsedSkills[2]}</p>
-          <p>クツ: ${parsedSkills[3]}</p>
-        `;
+        for (const step of steps) {
+          const previousSelection[step] = parsedSkills[step];
+        }
       }
     }
 
