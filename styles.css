@@ -50,7 +50,27 @@ h3 {
   color: #ff6347;
 }
 
+#random-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff6347;
+  color: #fff;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
+#random-button:disabled {
+  background-color: #ddd;
+  color: #666;
+  cursor: not-allowed;
+}
+
+#stage-display {
+  margin-top: 20px;
+  font-size: 1.2em;
+}
 
 .container {
   max-width: 600px;
