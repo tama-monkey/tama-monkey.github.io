@@ -74,11 +74,11 @@ h3 {
 
 .container {
   max-width: 600px;
-  margin: 50px auto; /* コンテナを中央に配置し、上部に余白を追加 */
+  margin: 20px auto; /* コンテナを中央に配置し、上部に余白を追加 */
   padding: 20px;
   background-color: #ffffff; /* コンテナに白い背景色を追加 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
-  border-radius: 8px; /* 角を丸くする */
+  border-radius: 10px; /* 角を丸くする */
   transition: opacity 0.5s;
   position: relative;
   z-index: 1; /* メニューよりも低い値に設定 */
