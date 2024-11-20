@@ -51,7 +51,7 @@ h3 {
 }
 
 #random-button {
-  display: inline-block;
+  margin: 20px;
   padding: 10px 20px;
   background-color: #ff6347;
   color: #fff;
