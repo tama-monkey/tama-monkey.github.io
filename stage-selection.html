@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三択ロース杯</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>三択ロース杯</h1>
+    <p>開催日時: 2024年11月30日（土） 21:00〜</p>
+  </header>
+
+  <nav>
+    <a href="https://tama-monkey.github.io/">大会概要</a>
+    <a href="https://tama-monkey.github.io/skill-selection">スキル選択</a>
+    <a href="https://tama-monkey.github.io/stage-selection">ステージ選択</a>
+  </nav>
+  
+  <section>
+    <h2>ステージ選択</h2>
+    <button id="random-button">ランダムステージ選択</button>
+    <div id="stage-display"></div>
+  </section>
+
+  <footer class="footer">
+      <p>&copy; 2024 三択ロース杯運営チーム</p>
+      <a href="https://tama-monkey.github.io/">トップページに戻る</a>
+  </footer>
+
+  <script>
+    const stages = [
+      'マサバ海峡大橋', 'マヒマヒリゾート＆スパ', 'チョウザメ造船', 'ザトウマーケット', 'コンブトラック',
+      'マテガイ放水路', 'ネギトロ炭鉱', 'タラポートショッピングパーク', 'オヒョウ海運', 'ナメロウ金属',
+      'タカアシ経済特区', '海女美術大学', 'キンメダイ美術館', 'クサヤ温泉', 'ナンプラー遺跡',
+      'ヤガラ市場', 'リュウグウターミナル', 'マンタマリア号', 'カジキ空港', 'バイガイ亭',
+      'ゴンズイ地区', 'スメーシーワールド', 'ユノハナ大渓谷', 'ヒラメが丘団地'
+    ];
+
+    const randomButton = document.getElementById('random-button');
+    const stageDisplay = document.getElementById('stage-display');
+    const cooldownTime = 5000; // 5秒
+
+    function selectRandomStages() {
+      let selectedStages = [];
+      while (selectedStages.length < 3) {
+        const randomStage = stages[Math.floor(Math.random() * stages.length)];
+        if (!selectedStages.includes(randomStage)) {
+          selectedStages.push(randomStage);
+        }
+      }
+      return selectedStages;
+    }
+
+    function updateButtonCooldown(seconds) {
+      randomButton.disabled = true;
+      randomButton.textContent = `再選択可能まで ${seconds} 秒`;
+
+      const interval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          randomButton.textContent = `再選択可能まで ${seconds} 秒`;
+        } else {
+          clearInterval(interval);
+          randomButton.disabled = false;
+          randomButton.textContent = 'ランダムステージ選択';
+        }
+      }, 1000);
+    }
+
+    randomButton.addEventListener('click', () => {
+      const selectedStages = selectRandomStages();
+      stageDisplay.innerHTML = `
+        <p>1試合目: ${selectedStages[0]}</p>
+        <p>2試合目: ${selectedStages[1]}</p>
+        <p>3試合目: ${selectedStages[2]}</p>
+      `;
+      updateButtonCooldown(cooldownTime / 1000);
+    });
+  </script>
+  
+</body>
+</html>
