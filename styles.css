@@ -40,10 +40,6 @@ h1 {
   background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
 }
 
-.selected {
-  animation: splash 0.5s ease-in-out;
-}
-
 .choice-box:disabled {
   background-color: #f3f3f3;
   color: #f3f3f3;
@@ -86,11 +82,6 @@ h1 {
 }
 
 /* アニメーション */
-@keyframes splash {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1.05); }
-}
 
 @keyframes fadeOut {
   0% { opacity: 1; }
@@ -134,15 +125,3 @@ h1 {
   50% { transform: translateX(-10%) scale(1.05); }
   100% { transform: translateX(0) scale(1); }
 }
-
-/* カラフルなフラッシュ効果 */
-.flash-bg {
-  animation: flash 0.3s ease;
-}
-
-@keyframes flash {
-  0% { background-color: #ffda79; }
-  50% { background-color: #ff7979; }
-  100% { background-color: #ffffff; }
-}
-
