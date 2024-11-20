@@ -171,6 +171,9 @@
   
         // リセットボタンの無効化を管理
         if (currentStep === "クツ") {
+          if (!selectedSkills.includes(userSelections)) {
+            selectedSkills.push(userSelections);
+          }
           previousSelection = userSelections; // 現在の選択を保存
           resetButtonDisabledUntil = Date.now() + coolTime;
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
