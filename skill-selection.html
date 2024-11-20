@@ -100,7 +100,6 @@
       }
     }
 
-    loadSkills();
 
     // ランダムに3つの選択肢を生成
     function getRandomChoices() {
@@ -237,8 +236,7 @@
           skillDiv.textContent = `${step}: ${choice}`;
           prevSection.appendChild(skillDiv);
         }
-      }
-      
+      } 
     }
 
     // リセット機能
@@ -292,6 +290,7 @@
     }
 
     setInterval(updateResetButtonCountdown, 1000);
+    loadSkills();
 
     // 初期化
     displayChoices();
