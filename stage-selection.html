@@ -43,6 +43,20 @@
     const stageDisplay = document.getElementById('stage-display');
     const cooldownTime = 5000; // 5秒
 
+    // セッションストレージからステージ情報を読み込む
+    function loadStages() {
+      const savedStages = sessionStorage.getItem('selectedStages');
+      if (savedStages) {
+        const parsedStages = JSON.parse(savedStages);
+        stageDisplay.innerHTML = `
+          <p>1試合目: ${parsedStages[0]}</p>
+          <p>2試合目: ${parsedStages[1]}</p>
+          <p>3試合目: ${parsedStages[2]}</p>
+        `;
+      }
+    }
+
+    // ステージをランダム選択し、セッションストレージに保存
     function selectRandomStages() {
       let selectedStages = [];
       while (selectedStages.length < 3) {
@@ -51,9 +65,22 @@
           selectedStages.push(randomStage);
         }
       }
-      return selectedStages;
+
+      // 表示を更新
+      stageDisplay.innerHTML = `
+        <p>1試合目: ${selectedStages[0]}</p>
+        <p>2試合目: ${selectedStages[1]}</p>
+        <p>3試合目: ${selectedStages[2]}</p>
+      `;
+
+      // セッションストレージに保存
+      sessionStorage.setItem('selectedStages', JSON.stringify(selectedStages));
+
+      // ボタンのクールダウン
+      updateButtonCooldown(cooldownTime / 1000);
     }
 
+    // ボタンをクールダウン中に無効化
     function updateButtonCooldown(seconds) {
       randomButton.disabled = true;
       randomButton.textContent = `再選択可能まで ${seconds} 秒`;
@@ -70,15 +97,10 @@
       }, 1000);
     }
 
-    randomButton.addEventListener('click', () => {
-      const selectedStages = selectRandomStages();
-      stageDisplay.innerHTML = `
-        <p>1試合目: ${selectedStages[0]}</p>
-        <p>2試合目: ${selectedStages[1]}</p>
-        <p>3試合目: ${selectedStages[2]}</p>
-      `;
-      updateButtonCooldown(cooldownTime / 1000);
-    });
+    // ページ読み込み時にセッションストレージからデータを表示
+    loadStages();
+
+    randomButton.addEventListener('click', selectRandomStages);
   </script>
   
 </body>
