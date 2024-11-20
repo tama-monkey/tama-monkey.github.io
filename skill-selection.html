@@ -226,7 +226,19 @@
       }
 
       // リセット前の選択スキルがあれば表示
-      loadSkills()
+      if (previousSelection) {
+        let prevSection = document.createElement("div");
+        prevSection.className = "section";
+        prevSection.textContent = "リセット前の選択:";
+        container.appendChild(prevSection);
+        for (const step of steps) {
+          const choice = previousSelection[step] || "未選択";
+          const skillDiv = document.createElement("div");
+          skillDiv.className = "skill-display"; // 文字サイズを適用
+          skillDiv.textContent = `${step}: ${choice}`;
+          prevSection.appendChild(skillDiv);
+        }
+      }
       
     }
 
