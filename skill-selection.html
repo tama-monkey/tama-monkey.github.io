@@ -89,7 +89,22 @@
       ]
     };
 
+    
     // セッションストレージからステージ情報を読み込む
+    function initializeState() {
+      // セッションストレージからデータを読み込む
+      const savedSelections = sessionStorage.getItem('userSelections');
+      const savedStepIndex = sessionStorage.getItem('currentStepIndex');
+    
+      if (savedSelections) {
+        userSelections = JSON.parse(savedSelections);
+      }
+    
+      if (savedStepIndex) {
+        currentStepIndex = parseInt(savedStepIndex, 10); // 整数に変換
+      }
+    }
+    
     function loadPreviousSelections() {
       const savedPreviousSelection = sessionStorage.getItem('previousSelection');
       if (savedPreviousSelection) {
@@ -142,6 +157,10 @@
     function selectChoice(choiceDiv, choice) {
       const currentStep = steps[currentStepIndex];
       userSelections[currentStep] = choice;
+
+      // セッションストレージに保存
+      sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
+      sessionStorage.setItem('currentStepIndex', currentStepIndex);
       
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
@@ -274,6 +293,9 @@
         previousSelection = userSelections; // リセット時に前の選択を保持
         sessionStorage.setItem('previousSelection', JSON.stringify(previousSelection)); // セッションストレージに保存
         userSelections = {};  // ユーザーの選択をクリア
+        // セッションストレージも更新
+        sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
+        sessionStorage.setItem('currentStepIndex', currentStepIndex);
         displayChoices();
         document.getElementById("choices").style.display = 'block';
         updateSelectionsDisplay();
@@ -287,6 +309,7 @@
     setInterval(updateResetButtonCountdown, 1000);
 
     // 初期化
+    initializeState();
     loadPreviousSelections();
     displayChoices();
   </script>
