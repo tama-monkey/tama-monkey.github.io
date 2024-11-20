@@ -14,7 +14,7 @@ header {
   text-align: center;
 }
 
-header h1 {
+h1 {
   font-size: 2.5em;
   margin: 0;
 }
@@ -46,7 +46,7 @@ section {
   border-radius: 10px;
 }
 
-h2 {
+h3 {
   color: #ff6347;
 }
 
@@ -64,7 +64,7 @@ h2 {
   z-index: 1; /* メニューよりも低い値に設定 */
 }
 
-h1 {
+h2 {
   font-size: 1.8em;
   margin-bottom: 20px;
   color: #2c3e50;
