@@ -130,6 +130,7 @@ h2 {
 
 #reset-btn {
   height: 90px;
+  min-width: 200px;
   max-width: 440px;
   margin: 60px auto;
   padding: 20px;
