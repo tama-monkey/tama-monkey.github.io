@@ -112,6 +112,9 @@
         // リセットボタンを有効化し、選択表示を隠す
         document.getElementById("reset-btn").style.display = 'block';
         document.getElementById("choices").style.display = 'none';
+        setTimeout(() => {
+          document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
+        }, coolTime);
       } else {
         // 現在のステップに応じて選択肢を表示
         displayChoices();
