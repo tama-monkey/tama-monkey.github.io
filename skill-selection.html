@@ -112,6 +112,8 @@
         // リセットボタンを有効化し、選択表示を隠す
         document.getElementById("reset-btn").style.display = 'block';
         document.getElementById("choices").style.display = 'none';
+        resetButtonDisabledUntil = Date.now() + coolTime;
+        updateResetButtonCountdown();
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // 120秒後にリセットボタンを有効化
         }, coolTime);
