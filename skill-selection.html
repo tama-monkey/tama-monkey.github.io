@@ -162,7 +162,7 @@
 
       // セッションストレージに保存
       sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
-      sessionStorage.setItem('currentStepIndex', currentStepIndex);
+      sessionStorage.setItem('currentStepIndex', currentStepIndex+1);
       
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
