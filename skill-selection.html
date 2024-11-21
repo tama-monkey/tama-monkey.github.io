@@ -156,6 +156,9 @@
     // 選択肢を表示
     function displayChoices() {
       if (currentStepIndex < 4) {
+        if (currentStepIndex < 0) {
+          currentStepIndex = 0;
+        }
         const currentStep = steps[currentStepIndex];
         document.getElementById("current-step").textContent = currentStep;
         const choices = getRandomChoices();
@@ -315,7 +318,7 @@
       // スライドアウトが終わるまで待機
       setTimeout(() => { 
         document.getElementById("reset-btn").style.display = 'none';
-        currentStepIndex = 0;
+        currentStepIndex = -1;
         previousSelection = userSelections; // リセット時に前の選択を保持
         sessionStorage.setItem('previousSelection', JSON.stringify(previousSelection)); // セッションストレージに保存
         userSelections = {};  // ユーザーの選択をクリア
