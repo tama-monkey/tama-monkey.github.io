@@ -103,6 +103,8 @@
       if (savedStepIndex) {
         currentStepIndex = parseInt(savedStepIndex, 10); // 整数に変換
       }
+
+      updateSelectionsDisplay();
     }
     
     function loadPreviousSelections() {
@@ -309,8 +311,8 @@
     setInterval(updateResetButtonCountdown, 1000);
 
     // 初期化
-    initializeState();
     loadPreviousSelections();
+    initializeState();
     displayChoices();
   </script>
 </body>
