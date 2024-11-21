@@ -94,7 +94,7 @@
     function initializeState() {
       // セッションストレージからデータを読み込む
       const savedSelections = sessionStorage.getItem('userSelections');
-      const savedStepIndex = 1 + sessionStorage.getItem('currentStepIndex');
+      const savedStepIndex = sessionStorage.getItem('currentStepIndex');
     
       if (savedSelections) {
         userSelections = JSON.parse(savedSelections);
