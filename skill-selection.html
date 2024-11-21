@@ -95,7 +95,7 @@
       // セッションストレージからデータを読み込む
       const savedSelections = sessionStorage.getItem('userSelections');
       const savedStepIndex = sessionStorage.getItem('currentStepIndex');
-      const savedremainingTime = sessionStorage.getItem('remainingTime');
+      const savedresetButtonDisabledUntil = sessionStorage.getItem('resetButtonDisabledUntil');
     
       if (savedSelections) {
         userSelections = JSON.parse(savedSelections);
@@ -105,8 +105,8 @@
         currentStepIndex = parseInt(savedStepIndex, 10); // 整数に変換
       }
 
-      if (savedremainingTime) {
-        remainingTime = parseInt(savedremainingTime, 10); // 整数に変換
+      if (savedresetButtonDisabledUntil) {
+        resetButtonDisabledUntil = parseInt(resetButtonDisabledUntil, 10); // 整数に変換
       }
 
       updateSelectionsDisplay();
@@ -117,7 +117,6 @@
         // リセットボタンを有効化し、選択表示を隠す
         document.getElementById("reset-btn").style.display = 'block';
         document.getElementById("choices").style.display = 'none';
-        resetButtonDisabledUntil = Date.now() + remainingTime;
         updateResetButtonCountdown();
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // remainingTime後にリセットボタンを有効化
@@ -298,7 +297,7 @@
       } else if (remainingTime > 0) {
         resetButton.disabled = true;
         resetButton.textContent = `リセット (${Math.ceil(remainingTime / 1000)} 秒後に有効)`;
-        sessionStorage.setItem('remainingTime', remainingTime);
+        sessionStorage.setItem('resetButtonDisabledUntil', resetButtonDisabledUntil);
       } else {
         resetButton.disabled = false;
         resetButton.textContent = "リセット";
