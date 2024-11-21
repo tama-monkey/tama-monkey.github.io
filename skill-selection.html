@@ -43,6 +43,7 @@
     let currentStepIndex = 0;
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
+    let remainingTime = 0;
     let resetButtonDisabledUntil = Date.now() + 1200000; // リセットボタンの無効化管理
     let coolTime = 5000; // リセットボタンのクールタイム(ms)
 
@@ -118,7 +119,7 @@
         document.getElementById("reset-btn").style.display = 'block';
         document.getElementById("choices").style.display = 'none';
         updateResetButtonCountdown();
-        const remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
+        remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
         setTimeout(() => {
           document.getElementById("reset-btn").disabled = false; // remainingTime後にリセットボタンを有効化
         }, remainingTime);
@@ -290,7 +291,7 @@
     };
 
     function updateResetButtonCountdown() {
-      const remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
+      remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
       const resetButton = document.getElementById("reset-btn");
       if (remainingTime > 0) {
         resetButton.disabled = true;
