@@ -76,6 +76,7 @@ h3 {
 }
 
 .container {
+  text-align:center;
   max-width: 600px;
   margin: 20px auto; /* コンテナを中央に配置し、上部に余白を追加 */
   padding: 20px;
