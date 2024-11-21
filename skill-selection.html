@@ -161,7 +161,17 @@
         }
         const currentStep = steps[currentStepIndex];
         document.getElementById("current-step").textContent = currentStep;
-        const choices = getRandomChoices();
+
+        let choices = [];
+        // リロード時の復元
+        const savedChoices = sessionStorage.getItem(`choices-${currentStep}`);
+        if (savedChoices) {
+          choices = JSON.parse(savedChoices);
+        } else {
+          // 新しい選択肢を生成
+          choices = getRandomChoices();
+          sessionStorage.setItem(`choices-${currentStep}`, JSON.stringify(choices));
+        }
 
         const choicesContainer = document.getElementById("choices");
         choicesContainer.innerHTML = "";  // リセット
@@ -189,6 +199,9 @@
       // セッションストレージに保存
       sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
       sessionStorage.setItem('currentStepIndex', currentStepIndex);
+
+      // 選択肢データを削除
+      sessionStorage.removeItem(`choices-${currentStep}`);
       
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
@@ -322,6 +335,10 @@
         previousSelection = userSelections; // リセット時に前の選択を保持
         sessionStorage.setItem('previousSelection', JSON.stringify(previousSelection)); // セッションストレージに保存
         userSelections = {};  // ユーザーの選択をクリア
+        // 現在の選択肢データをすべて削除
+        steps.forEach(step => {
+          sessionStorage.removeItem(`choices-${step}`);
+        });
         // セッションストレージも更新
         sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
         sessionStorage.setItem('currentStepIndex', currentStepIndex);
