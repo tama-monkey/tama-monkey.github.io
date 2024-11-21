@@ -44,7 +44,6 @@
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
     let remainingTime = 0;
-    let resetButtonDisabledUntil = Date.now() + 1200000; // リセットボタンの無効化管理
     let coolTime = 5000; // リセットボタンのクールタイム(ms)
 
     // データ
@@ -107,7 +106,9 @@
       }
 
       if (savedresetButtonDisabledUntil) {
-        resetButtonDisabledUntil = parseInt(resetButtonDisabledUntil, 10); // 整数に変換
+        let resetButtonDisabledUntil = parseInt(resetButtonDisabledUntil, 10); // 整数に変換
+      }else {
+        let resetButtonDisabledUntil = Date.now() + 1200000;
       }
 
       updateSelectionsDisplay();
