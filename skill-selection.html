@@ -211,6 +211,7 @@
         if (currentStep === "クツ") {
           previousSelection = userSelections; // 現在の選択を保存
           resetButtonDisabledUntil = Date.now() + coolTime;
+          sessionStorage.setItem('resetButtonDisabledUntil', resetButtonDisabledUntil);
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("reset-btn").style.display = 'block';
           document.getElementById("choices").style.display = 'none';
@@ -296,7 +297,6 @@
       if (remainingTime > 0) {
         resetButton.disabled = true;
         resetButton.textContent = `リセット (${Math.ceil(remainingTime / 1000)} 秒後に有効)`;
-        sessionStorage.setItem('resetButtonDisabledUntil', resetButtonDisabledUntil);
       } else {
         resetButton.disabled = false;
         resetButton.textContent = "リセット";
