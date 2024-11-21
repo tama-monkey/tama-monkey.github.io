@@ -105,6 +105,17 @@
       }
 
       updateSelectionsDisplay();
+
+      // 全てのステップが選択されているか確認
+      const allStepsCompleted = steps.every(step => userSelections[step]);
+      if (allStepsCompleted) {
+        // リセットボタンを有効化し、選択表示を隠す
+        document.getElementById("reset-btn").style.display = 'block';
+        document.getElementById("choices").style.display = 'none';
+      } else {
+        // 現在のステップに応じて選択肢を表示
+        displayChoices();
+      }
     }
     
     function loadPreviousSelections() {
@@ -162,7 +173,7 @@
 
       // セッションストレージに保存
       sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
-      sessionStorage.setItem('currentStepIndex', currentStepIndex+1);
+      sessionStorage.setItem('currentStepIndex', currentStepIndex);
       
       // 選択したスキルを表に追加
       updateSelectionsDisplay();
