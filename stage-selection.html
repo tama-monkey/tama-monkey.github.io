@@ -21,7 +21,7 @@
   
   <div class="container2">
     <h2>ステージ選択</h2>
-    <button id="random-button">ランダムステージ選択</button>
+    <button id="random-button" disabled>ランダムステージ選択</button>
     <div id="stage-display"></div>
   </div>
 
@@ -39,7 +39,7 @@
       'ゴンズイ地区', 'スメーシーワールド', 'ユノハナ大渓谷', 'ヒラメが丘団地'
     ];
 
-    let randomButtonDisabledUntil = Date.now() + 12000000; // ランダムボタンの無効化管理
+    let randomButtonDisabledUntil = Date.now(); // ランダムボタンの無効化管理
     const randomButton = document.getElementById('random-button');
     const stageDisplay = document.getElementById('stage-display');
     const cooldownTime = 5000; // 5秒
