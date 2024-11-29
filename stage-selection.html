@@ -39,7 +39,7 @@
       'ゴンズイ地区', 'スメーシーワールド', 'ユノハナ大渓谷', 'ヒラメが丘団地'
     ];
 
-    let randomButtonDisabledUntil = Date.now(); // ランダムボタンの無効化管理
+    let randomButtonDisabledUntil = Date.now() + 12000000; // ランダムボタンの無効化管理
     const randomButton = document.getElementById('random-button');
     const stageDisplay = document.getElementById('stage-display');
     const cooldownTime = 5000; // 5秒
@@ -96,6 +96,9 @@
 
       randomButtonDisabledUntil = Date.now() + cooldownTime;
       sessionStorage.setItem('randomButtonDisabledUntil', randomButtonDisabledUntil);
+
+      // ボタンの状態を更新
+      updateButtonCooldown();
     }
 
     // ボタンをクールダウン中に無効化
