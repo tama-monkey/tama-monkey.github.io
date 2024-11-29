@@ -310,10 +310,7 @@
     function updateResetButtonCountdown() {
       const remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
       const resetButton = document.getElementById("reset-btn");
-      if (remainingTime > 1200000) {
-        resetButton.disabled = true;
-        resetButton.textContent = `リセット`;
-      } else if (remainingTime > 0) {
+      if (remainingTime > 0) {
         resetButton.disabled = true;
         resetButton.textContent = `リセット (${Math.ceil(remainingTime / 1000)} 秒後に有効)`;
         sessionStorage.setItem('remainingTime', remainingTime);
