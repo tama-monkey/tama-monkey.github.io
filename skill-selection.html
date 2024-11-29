@@ -352,6 +352,8 @@
       container.classList.remove('bounce-in');
     }
 
+    setInterval(updateResetButtonCountdown, 1000);
+
     // 初期化
     loadPreviousSelections();
     initializeState();
