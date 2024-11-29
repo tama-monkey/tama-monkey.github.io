@@ -101,9 +101,9 @@
     // ボタンをクールダウン中に無効化
     function updateButtonCooldown() {
       randomButton.disabled = true;
-      let seconds = (randomButtonDisabledUntil - Date.now)/1000
-
+      
       const interval = setInterval(() => {
+        let seconds = (randomButtonDisabledUntil - Date.now)/1000
         if (seconds > 0) {
           randomButton.textContent = `再選択可能まで ${seconds} 秒`;
         } else {
@@ -112,7 +112,7 @@
           randomButton.textContent = 'ランダムステージ選択';
         }
         seconds--;
-      }, 1000);
+      }, 100);
 
       
     }
