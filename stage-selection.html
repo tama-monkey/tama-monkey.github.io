@@ -105,6 +105,7 @@
       const interval = setInterval(() => {
         let seconds = (randomButtonDisabledUntil - Date.now)/1000
         if (seconds > 0) {
+          randomButton.disabled = true;
           randomButton.textContent = `再選択可能まで ${seconds} 秒`;
         } else {
           clearInterval(interval);
