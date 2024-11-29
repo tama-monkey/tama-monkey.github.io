@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -42,10 +41,9 @@
     const steps = ["ブキ", "アタマ", "フク", "クツ"];
     const skillDisplay = document.getElementById('selections-container');
     let currentStepIndex = 0;
-    let remainingTime = 0;
     let userSelections = {};  // ユーザーの選択を保存
     let previousSelection = null; // リセット前の選択を保存
-    let resetButtonDisabledUntil = Date.now() + 1200000; // リセットボタンの無効化管理
+    let resetButtonDisabledUntil = Date.now() + 12000000; // リセットボタンの無効化管理
     let coolTime = 5000; // リセットボタンのクールタイム(ms)
 
     // データ
@@ -91,13 +89,18 @@
       ]
     };
 
-    
+    // 初期化
+    loadPreviousSelections();
+    initializeState();
+    setInterval(updateResetButtonCountdown, 100);
+    displayChoices();
+
     // セッションストレージからステージ情報を読み込む
     function initializeState() {
       // セッションストレージからデータを読み込む
       const savedSelections = sessionStorage.getItem('userSelections');
       const savedStepIndex = sessionStorage.getItem('currentStepIndex');
-      const savedremainingTime = sessionStorage.getItem('remainingTime');
+      const savedResetButtonDisabledUntil = sessionStorage.getItem('resetButtonDisabledUntil');
     
       if (savedSelections) {
         userSelections = JSON.parse(savedSelections);
@@ -108,8 +111,8 @@
         currentStepIndex++;
       }
 
-      if (savedremainingTime) {
-        remainingTime = parseInt(savedremainingTime, 10); // 整数に変換
+      if (savedResetButtonDisabledUntil) {
+        resetButtonDisabledUntil = parseInt(savedResetButtonDisabledUntil, 10); // 整数に変換
       }
 
       updateSelectionsDisplay();
@@ -119,12 +122,8 @@
       if (allStepsCompleted) {
         // リセットボタンを有効化し、選択表示を隠す
         document.getElementById("reset-btn").style.display = 'block';
+        document.getElementById("step").style.display = 'none';
         document.getElementById("choices").style.display = 'none';
-        resetButtonDisabledUntil = Date.now() + remainingTime;
-        updateResetButtonCountdown();
-        setTimeout(() => {
-          document.getElementById("reset-btn").disabled = false; // remainingTime後にリセットボタンを有効化
-        }, remainingTime);
       } else {
         // 現在のステップに応じて選択肢を表示
         displayChoices();
@@ -229,8 +228,10 @@
         if (currentStep === "クツ") {
           previousSelection = userSelections; // 現在の選択を保存
           resetButtonDisabledUntil = Date.now() + coolTime;
+          sessionStorage.setItem('resetButtonDisabledUntil', resetButtonDisabledUntil);
           document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
           document.getElementById("reset-btn").style.display = 'block';
+          document.getElementById("step").style.display = 'none';
           document.getElementById("choices").style.display = 'none';
           currentStepIndex++;
           setTimeout(() => {
@@ -300,7 +301,6 @@
       if (confirmReset) {
         // 選択したスキルの表示を更新
         document.getElementById("reset-btn").disabled = true; // リセットボタンを無効化
-        resetButtonDisabledUntil = Date.now() + 12000000;
         resetSelections();
         // メニューの表示状態をリセット
         const menu = document.querySelector('.nav-menu');
@@ -309,12 +309,14 @@
     };
 
     function updateResetButtonCountdown() {
-      remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
+      const remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
       const resetButton = document.getElementById("reset-btn");
-      if (remainingTime > 0) {
+      if (remainingTime > 120000) {
+        resetButton.disabled = true;
+        resetButton.textContent = `リセット`;
+      } else if (remainingTime > 0) {
         resetButton.disabled = true;
         resetButton.textContent = `リセット (${Math.ceil(remainingTime / 1000)} 秒後に有効)`;
-        sessionStorage.setItem('remainingTime', remainingTime);
       } else {
         resetButton.disabled = false;
         resetButton.textContent = "リセット";
@@ -341,6 +343,7 @@
         sessionStorage.setItem('userSelections', JSON.stringify(userSelections));
         sessionStorage.setItem('currentStepIndex', currentStepIndex);
         displayChoices();
+        document.getElementById("step").style.display = 'block';
         document.getElementById("choices").style.display = 'block';
         updateSelectionsDisplay();
         container.classList.add('bounce-in');
@@ -350,13 +353,6 @@
       container.classList.remove('bounce-in');
     }
 
-    
-
-    // 初期化
-    loadPreviousSelections();
-    initializeState();
-    setInterval(updateResetButtonCountdown, 1000);
-    displayChoices();
   </script>
 </body>
 </html>
