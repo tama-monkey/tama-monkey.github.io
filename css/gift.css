@@ -1,0 +1,51 @@
+body {
+    background-color: #f2f8ff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://example.com/christmas-bg.jpg'); /* 背景画像のURLを変更してください */
+    background-size: cover;
+    color: #333;
+}
+h1 {
+    color: #ff0033;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #fff;
+}
+h2 {
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+.prizes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+.prize {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    transition: transform 0.3s;
+}
+.prize:hover {
+    transform: scale(1.1);
+}
+.prize img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.prize h3 {
+    font-size: 1.2rem;
+    color: #444;
+}
+footer {
+    margin-top: 50px;
+    font-size: 0.8rem;
+    color: #666;
+}
