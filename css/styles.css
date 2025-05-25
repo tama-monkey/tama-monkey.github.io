@@ -1,75 +1,101 @@
 :root {
+  /* Light Theme Variables */
   --bg-color: #f4f4f9;
   --text-color: #333;
   --header-bg: linear-gradient(to right, #ff6347, #ffa500);
   --header-text: #fff;
   --nav-bg: #333;
   --nav-text: #fff;
-  --section-bg: #fff;
+  --link-color: #fff; /* Primarily for nav links */
+
+  --section-bg: #fff; /* For generic <section> elements, if used */
   --section-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  --h3-color: #2c3e50; /* Used by section h3 */
-  --h2-color: #ff6347; /* Used by container h2 */
-  --button-bg: #ff6347;
+
+  --container-bg: #ffffff;
+  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  --h2-color: #ff6347; /* For main headings in containers */
+  --h3-color: #2c3e50; /* For sub-headings or section titles */
+
+  --button-bg: #ff6347; /* For #random-button */
   --button-text: #fff;
   --button-disabled-bg: #ddd;
   --button-disabled-text: #666;
-  --link-color: #fff; /* For nav links */
+
   --choice-box-bg: #f3f3f3;
   --choice-box-border: #ddd;
+  --choice-box-text: #333; /* Text color inside choice boxes */
   --choice-box-hover-bg: #e1e1e1;
   --choice-box-disabled-bg: #f3f3f3;
-  --choice-box-disabled-text: #f3f3f3; /* Text color for disabled choice box, effectively making it invisible */
-  --container-bg: #ffffff;
-  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --choice-box-disabled-text: #aaa; /* Dimmed text for disabled choice box */
+
   --reset-btn-bg: #e74c3c;
   --reset-btn-text: #fff;
   --reset-btn-border: #c0392b;
   --reset-btn-hover-bg: #c0392b;
   --reset-btn-disabled-bg: #ddd;
   --reset-btn-disabled-text: #999;
+
   --skill-display-color: #555;
-  --footer-bg: inherit; /* Assuming footer might not need a distinct bg from body */
-  --footer-text: var(--text-color);
+
+  --footer-bg: #f4f4f9; /* Match body or slightly different */
+  --footer-text: #333;
+  --footer-link-color: #ff6347; /* Same as --h2-color for emphasis */
+
   --toggle-button-bg: #eee;
   --toggle-button-text: #333;
   --toggle-button-border: #ccc;
+  --toggle-button-hover-bg: #ddd;
 }
 
 .dark-mode {
+  /* Dark Theme Variables */
   --bg-color: #121212;
   --text-color: #e0e0e0;
-  --header-bg: linear-gradient(to right, #4A00E0, #8E2DE2); /* Darker gradient for header */
+  --header-bg: linear-gradient(to right, #4A00E0, #8E2DE2);
   --header-text: #f0f0f0;
   --nav-bg: #1f1f1f;
   --nav-text: #e0e0e0;
+  --link-color: #e0e0e0;
+
   --section-bg: #1e1e1e;
-  --section-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  --h3-color: #bb86fc;
-  --h2-color: #bb86fc; /* Using the same purple for general consistency in dark mode */
+  --section-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+
+  --container-bg: #1e1e1e;
+  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+  --h2-color: #bb86fc;
+  --h3-color: #a78bfa; /* Slightly different from h2 for hierarchy if needed */
+
   --button-bg: #6200ee;
   --button-text: #f0f0f0;
-  --button-disabled-bg: #444;
-  --button-disabled-text: #888;
-  --link-color: #e0e0e0; /* For nav links */
+  --button-disabled-bg: #2a2a2a;
+  --button-disabled-text: #777;
+
   --choice-box-bg: #2c2c2c;
   --choice-box-border: #444;
+  --choice-box-text: #e0e0e0;
   --choice-box-hover-bg: #383838;
   --choice-box-disabled-bg: #2c2c2c;
-  --choice-box-disabled-text: #555; /* Dark mode disabled choice box text */
-  --container-bg: #1e1e1e;
-  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --choice-box-disabled-text: #666;
+
   --reset-btn-bg: #bb86fc;
-  --reset-btn-text: #121212;
+  --reset-btn-text: #121212; /* Dark text on light purple button */
   --reset-btn-border: #3700B3;
-  --reset-btn-hover-bg: #3700B3;
-  --reset-btn-disabled-bg: #444;
-  --reset-btn-disabled-text: #888;
-  --skill-display-color: #b0b0b0; /* Lighter than default text for dark mode */
+  --reset-btn-hover-bg: #9e66fa; /* Lighter hover for dark mode button */
+  --reset-btn-disabled-bg: #2a2a2a;
+  --reset-btn-disabled-text: #777;
+
+  --skill-display-color: #b0b0b0;
+
   --footer-bg: #1f1f1f;
-  --footer-text: var(--text-color);
-  --toggle-button-bg: var(--nav-bg);
-  --toggle-button-text: var(--nav-text);
-  --toggle-button-border: var(--nav-text);
+  --footer-text: #c0c0c0;
+  --footer-link-color: #bb86fc; /* Same as --h2-color for emphasis */
+
+  --toggle-button-bg: #2c2c2c;
+  --toggle-button-text: #e0e0e0;
+  --toggle-button-border: #444;
+  --toggle-button-hover-bg: #383838;
 }
 
 body {
@@ -79,7 +105,7 @@ body {
   line-height: 1.6;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -87,18 +113,20 @@ header {
   color: var(--header-text);
   padding: 20px 0;
   text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-h1 {
+h1 { /* Primarily for header */
   font-size: 2.5em;
   margin: 0;
+  color: var(--header-text); /* Ensure h1 in header uses header text color */
 }
 
 nav {
   background: var(--nav-bg);
-  color: var(--nav-text); /* Set text color for nav itself, though links are more specific */
   padding: 10px 0;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 nav a {
@@ -106,27 +134,34 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-size: 1.2em;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
   text-decoration: underline;
 }
 
-section { /* This seems to be a generic section style, maybe not used by current HTMLs directly */
+/* Generic section styling - if specific <section> tags are used elsewhere */
+section {
   padding: 20px;
   margin: 20px auto;
   max-width: 800px;
   background: var(--section-bg);
   box-shadow: var(--section-shadow);
   border-radius: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-section h3 { /* Specific to h3 within a section element */
+/* h3 inside a <section> element */
+section h3 {
   color: var(--h3-color);
+  transition: color 0.3s ease;
 }
 
-h3 { /* More general h3, if used outside sections */
+/* General h3 styling if used outside of <section> */
+h3 {
   color: var(--h3-color);
+  transition: color 0.3s ease;
 }
 
 #random-button {
@@ -141,6 +176,7 @@ h3 { /* More general h3, if used outside sections */
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #random-button:disabled {
@@ -152,7 +188,8 @@ h3 { /* More general h3, if used outside sections */
 #stage-display {
   margin-top: 20px;
   font-size: 1.2em;
-  color: var(--text-color); /* Ensure stage display text uses theme color */
+  color: var(--text-color); /* Uses general text color */
+  transition: color 0.3s ease;
 }
 
 .container, .container2 {
@@ -162,7 +199,7 @@ h3 { /* More general h3, if used outside sections */
   background-color: var(--container-bg);
   box-shadow: var(--container-shadow);
   border-radius: 10px;
-  transition: opacity 0.5s, background-color 0.3s, box-shadow 0.3s;
+  transition: opacity 0.5s, background-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 1;
 }
@@ -171,11 +208,13 @@ h3 { /* More general h3, if used outside sections */
   text-align:center;
 }
 
-h2 { /* General h2 styling, used in containers */
+/* h2 primarily used within .container or .container2 */
+h2 {
   font-size: 1.8em;
   margin-bottom: 20px;
   color: var(--h2-color);
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .choice-box {
@@ -184,10 +223,10 @@ h2 { /* General h2 styling, used in containers */
   border: 2px solid var(--choice-box-border);
   border-radius: 12px;
   background: var(--choice-box-bg);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow for choice boxes */
+  color: var(--choice-box-text);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-  color: var(--text-color); /* Ensure text inside choice box is themed */
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .choice-box:hover {
@@ -197,11 +236,12 @@ h2 { /* General h2 styling, used in containers */
 .choice-box:disabled {
   background-color: var(--choice-box-disabled-bg);
   color: var(--choice-box-disabled-text);
-  border-color: var(--choice-box-border); /* Use border variable for consistency */
+  border-color: var(--choice-box-border); /* Keep border consistent or use a disabled border var */
   cursor: not-allowed;
 }
 
 #reset-btn {
+  display: block; /* To allow margin auto to center */
   height: 90px;
   min-width: 200px;
   max-width: 440px;
@@ -214,34 +254,32 @@ h2 { /* General h2 styling, used in containers */
   border: 1px solid var(--reset-btn-border);
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-#reset-btn:disabled {
-  color: var(--reset-btn-disabled-text);
-  cursor: not-allowed;
-  background: var(--reset-btn-disabled-bg);
-  border-color: var(--button-disabled-bg); /* Match general disabled button look */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 #reset-btn:hover:not(:disabled) {
   background-color: var(--reset-btn-hover-bg);
-  color: var(--header-text); /* Ensure text is readable on hover, e.g. white for dark hover bg */
-}
-.dark-mode #reset-btn:hover:not(:disabled) {
-  color: var(--button-text); /* Specific for dark mode hover text */
 }
 
+#reset-btn:disabled {
+  color: var(--reset-btn-disabled-text);
+  background: var(--reset-btn-disabled-bg);
+  border-color: var(--reset-btn-disabled-bg); /* Or a specific disabled border */
+  cursor: not-allowed;
+}
 
-.section { /* This is for the div with class="section" inside skill-selection.html */
+/* Styling for the <div class="section"> used in skill-selection.html */
+.section {
   margin-top: 20px;
-  border-top: 1px solid var(--choice-box-border); /* Use a theme variable for border */
+  border-top: 1px solid var(--choice-box-border); /* Use a themable border color */
   padding-top: 15px;
+  transition: border-color 0.3s ease;
 }
 
 .skill-display {
   font-size: 1.2em;
   color: var(--skill-display-color);
+  transition: color 0.3s ease;
 }
 
 .footer {
@@ -250,11 +288,13 @@ h2 { /* General h2 styling, used in containers */
   background-color: var(--footer-bg);
   color: var(--footer-text);
   margin-top: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .footer a {
-  color: var(--h2-color); /* Use a prominent color for footer links */
+  color: var(--footer-link-color);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer a:hover {
@@ -269,15 +309,14 @@ h2 { /* General h2 styling, used in containers */
   background-color: var(--toggle-button-bg);
   color: var(--toggle-button-text);
   border: 1px solid var(--toggle-button-border);
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 #darkModeToggle:hover {
-  opacity: 0.8;
+  background-color: var(--toggle-button-hover-bg);
 }
 
-/* アニメーション (unchanged from original, assumed to be theme-agnostic) */
-
+/* Animations (assumed to be theme-agnostic) */
 @keyframes fadeOut {
   0% { opacity: 1; }
   100% { opacity: 0; }
