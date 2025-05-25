@@ -74,6 +74,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function loadAndDisplayTeamResults() {
+    const resultsString = sessionStorage.getItem('teamAssignmentResults');
+    if (resultsString) {
+      try {
+        const results = JSON.parse(resultsString);
+
+        // Ensure team1List, team2List, spectatorsList are accessible here
+        // They are defined at the top of the DOMContentLoaded listener, so they should be.
+        if (!team1List || !team2List || !spectatorsList) {
+          console.error('Team list DOM elements not found for displaying results.');
+          return;
+        }
+        
+        team1List.innerHTML = '';
+        team2List.innerHTML = '';
+        spectatorsList.innerHTML = '';
+
+        if (results.team1 && Array.isArray(results.team1)) {
+          results.team1.forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            team1List.appendChild(li);
+          });
+        }
+
+        if (results.team2 && Array.isArray(results.team2)) {
+          results.team2.forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            team2List.appendChild(li);
+          });
+        }
+
+        if (results.spectators && Array.isArray(results.spectators)) {
+          if (results.spectators.length > 0) {
+            results.spectators.forEach(name => {
+              const li = document.createElement('li');
+              li.textContent = name;
+              spectatorsList.appendChild(li);
+            });
+          } else {
+            const li = document.createElement('li');
+            li.textContent = 'なし'; // "None"
+            spectatorsList.appendChild(li);
+          }
+        }
+
+      } catch (e) {
+        console.error('Error parsing saved team results from session storage:', e);
+        // Optionally clear the faulty item: sessionStorage.removeItem('teamAssignmentResults');
+      }
+    }
+  }
+
   /**
    * Shuffles an array in place using the Fisher-Yates algorithm.
    * @param {Array} array - The array to shuffle.
@@ -154,6 +208,15 @@ document.addEventListener('DOMContentLoaded', () => {
       // Or, hide the "観戦" h3 if desired via CSS or JS
       spectatorsList.appendChild(li);
     }
+
+    // ---- ADD THIS PART ----
+    const resultsToStore = {
+      team1: team1Players,
+      team2: team2Players,
+      spectators: spectatorPlayers
+    };
+    sessionStorage.setItem('teamAssignmentResults', JSON.stringify(resultsToStore));
+    // ---- END OF ADDED PART ----
   }
 
   // Event Listener for Assign Teams Button
@@ -165,4 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial Call to generate input fields
   createPlayerInputs();
+  
+  // ADD THIS LINE: Load and display team results
+  loadAndDisplayTeamResults(); 
 });
