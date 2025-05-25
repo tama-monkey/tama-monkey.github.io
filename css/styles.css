@@ -1,15 +1,90 @@
+:root {
+  --bg-color: #f4f4f9;
+  --text-color: #333;
+  --header-bg: linear-gradient(to right, #ff6347, #ffa500);
+  --header-text: #fff;
+  --nav-bg: #333;
+  --nav-text: #fff;
+  --section-bg: #fff;
+  --section-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --h3-color: #2c3e50; /* Used by section h3 */
+  --h2-color: #ff6347; /* Used by container h2 */
+  --button-bg: #ff6347;
+  --button-text: #fff;
+  --button-disabled-bg: #ddd;
+  --button-disabled-text: #666;
+  --link-color: #fff; /* For nav links */
+  --choice-box-bg: #f3f3f3;
+  --choice-box-border: #ddd;
+  --choice-box-hover-bg: #e1e1e1;
+  --choice-box-disabled-bg: #f3f3f3;
+  --choice-box-disabled-text: #f3f3f3; /* Text color for disabled choice box, effectively making it invisible */
+  --container-bg: #ffffff;
+  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --reset-btn-bg: #e74c3c;
+  --reset-btn-text: #fff;
+  --reset-btn-border: #c0392b;
+  --reset-btn-hover-bg: #c0392b;
+  --reset-btn-disabled-bg: #ddd;
+  --reset-btn-disabled-text: #999;
+  --skill-display-color: #555;
+  --footer-bg: inherit; /* Assuming footer might not need a distinct bg from body */
+  --footer-text: var(--text-color);
+  --toggle-button-bg: #eee;
+  --toggle-button-text: #333;
+  --toggle-button-border: #ccc;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --header-bg: linear-gradient(to right, #4A00E0, #8E2DE2); /* Darker gradient for header */
+  --header-text: #f0f0f0;
+  --nav-bg: #1f1f1f;
+  --nav-text: #e0e0e0;
+  --section-bg: #1e1e1e;
+  --section-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  --h3-color: #bb86fc;
+  --h2-color: #bb86fc; /* Using the same purple for general consistency in dark mode */
+  --button-bg: #6200ee;
+  --button-text: #f0f0f0;
+  --button-disabled-bg: #444;
+  --button-disabled-text: #888;
+  --link-color: #e0e0e0; /* For nav links */
+  --choice-box-bg: #2c2c2c;
+  --choice-box-border: #444;
+  --choice-box-hover-bg: #383838;
+  --choice-box-disabled-bg: #2c2c2c;
+  --choice-box-disabled-text: #555; /* Dark mode disabled choice box text */
+  --container-bg: #1e1e1e;
+  --container-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --reset-btn-bg: #bb86fc;
+  --reset-btn-text: #121212;
+  --reset-btn-border: #3700B3;
+  --reset-btn-hover-bg: #3700B3;
+  --reset-btn-disabled-bg: #444;
+  --reset-btn-disabled-text: #888;
+  --skill-display-color: #b0b0b0; /* Lighter than default text for dark mode */
+  --footer-bg: #1f1f1f;
+  --footer-text: var(--text-color);
+  --toggle-button-bg: var(--nav-bg);
+  --toggle-button-text: var(--nav-text);
+  --toggle-button-border: var(--nav-text);
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-  background: linear-gradient(to right, #ff6347, #ffa500);
-  color: #fff;
+  background: var(--header-bg);
+  color: var(--header-text);
   padding: 20px 0;
   text-align: center;
 }
@@ -20,14 +95,14 @@ h1 {
 }
 
 nav {
-  background: #333;
-  color: #fff;
+  background: var(--nav-bg);
+  color: var(--nav-text); /* Set text color for nav itself, though links are more specific */
   padding: 10px 0;
   text-align: center;
 }
 
 nav a {
-  color: #fff;
+  color: var(--link-color);
   text-decoration: none;
   margin: 0 15px;
   font-size: 1.2em;
@@ -37,17 +112,21 @@ nav a:hover {
   text-decoration: underline;
 }
 
-section {
+section { /* This seems to be a generic section style, maybe not used by current HTMLs directly */
   padding: 20px;
   margin: 20px auto;
   max-width: 800px;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: var(--section-bg);
+  box-shadow: var(--section-shadow);
   border-radius: 10px;
 }
 
-h3 {
-  color: #2c3e50;
+section h3 { /* Specific to h3 within a section element */
+  color: var(--h3-color);
+}
+
+h3 { /* More general h3, if used outside sections */
+  color: var(--h3-color);
 }
 
 #random-button {
@@ -56,8 +135,8 @@ h3 {
   margin: 20px;
   text-align: center;
   padding: 10px 20px;
-  background-color: #ff6347;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   font-size: 1.2em;
   border: none;
   border-radius: 5px;
@@ -65,66 +144,60 @@ h3 {
 }
 
 #random-button:disabled {
-  background-color: #ddd;
-  color: #666;
+  background-color: var(--button-disabled-bg);
+  color: var(--button-disabled-text);
   cursor: not-allowed;
 }
 
 #stage-display {
   margin-top: 20px;
   font-size: 1.2em;
+  color: var(--text-color); /* Ensure stage display text uses theme color */
 }
 
-.container {
+.container, .container2 {
   max-width: 600px;
-  margin: 20px auto; /* コンテナを中央に配置し、上部に余白を追加 */
+  margin: 20px auto;
   padding: 20px;
-  background-color: #ffffff; /* コンテナに白い背景色を追加 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
-  border-radius: 10px; /* 角を丸くする */
-  transition: opacity 0.5s;
+  background-color: var(--container-bg);
+  box-shadow: var(--container-shadow);
+  border-radius: 10px;
+  transition: opacity 0.5s, background-color 0.3s, box-shadow 0.3s;
   position: relative;
-  z-index: 1; /* メニューよりも低い値に設定 */
+  z-index: 1;
 }
 
 .container2 {
   text-align:center;
-  max-width: 600px;
-  margin: 20px auto; /* コンテナを中央に配置し、上部に余白を追加 */
-  padding: 20px;
-  background-color: #ffffff; /* コンテナに白い背景色を追加 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加して立体感を演出 */
-  border-radius: 10px; /* 角を丸くする */
-  transition: opacity 0.5s;
-  position: relative;
-  z-index: 1; /* メニューよりも低い値に設定 */
 }
 
-h2 {
+h2 { /* General h2 styling, used in containers */
   font-size: 1.8em;
   margin-bottom: 20px;
-  color: #ff6347;
-  text-align: center; /* タイトルを中央揃えに */
+  color: var(--h2-color);
+  text-align: center;
 }
 
 .choice-box {
   margin: 12px 0;
   padding: 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--choice-box-border);
   border-radius: 12px;
-  background: #f3f3f3;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: var(--choice-box-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow for choice boxes */
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s;
+  color: var(--text-color); /* Ensure text inside choice box is themed */
 }
 
 .choice-box:hover {
-  background-color: #e1e1e1; /* ホバー時に背景色を明るくする */
+  background-color: var(--choice-box-hover-bg);
 }
 
 .choice-box:disabled {
-  background-color: #f3f3f3;
-  color: #f3f3f3;
+  background-color: var(--choice-box-disabled-bg);
+  color: var(--choice-box-disabled-text);
+  border-color: var(--choice-box-border); /* Use border variable for consistency */
   cursor: not-allowed;
 }
 
@@ -134,38 +207,76 @@ h2 {
   max-width: 440px;
   margin: 60px auto;
   padding: 20px;
-  color: #fff;
+  color: var(--reset-btn-text);
   font-size: 1.2em;
-  background: #e74c3c;
+  background: var(--reset-btn-bg);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #c0392b;
+  border: 1px solid var(--reset-btn-border);
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #reset-btn:disabled {
-  color: #999;
+  color: var(--reset-btn-disabled-text);
   cursor: not-allowed;
-  background: #ddd;
+  background: var(--reset-btn-disabled-bg);
+  border-color: var(--button-disabled-bg); /* Match general disabled button look */
 }
 
 #reset-btn:hover:not(:disabled) {
-  background-color: #c0392b; /* ホバー時に濃い赤に */
+  background-color: var(--reset-btn-hover-bg);
+  color: var(--header-text); /* Ensure text is readable on hover, e.g. white for dark hover bg */
+}
+.dark-mode #reset-btn:hover:not(:disabled) {
+  color: var(--button-text); /* Specific for dark mode hover text */
 }
 
-.section {
+
+.section { /* This is for the div with class="section" inside skill-selection.html */
   margin-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--choice-box-border); /* Use a theme variable for border */
   padding-top: 15px;
 }
 
 .skill-display {
   font-size: 1.2em;
-  color: #555;
+  color: var(--skill-display-color);
 }
 
-/* アニメーション */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  margin-top: 30px;
+}
+
+.footer a {
+  color: var(--h2-color); /* Use a prominent color for footer links */
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+#darkModeToggle {
+  padding: 8px 15px;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--toggle-button-bg);
+  color: var(--toggle-button-text);
+  border: 1px solid var(--toggle-button-border);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+#darkModeToggle:hover {
+  opacity: 0.8;
+}
+
+/* アニメーション (unchanged from original, assumed to be theme-agnostic) */
 
 @keyframes fadeOut {
   0% { opacity: 1; }
@@ -186,7 +297,6 @@ h2 {
   animation: fadeIn 0.5s forwards;
 }
 
-/* スライドアウトとスライドイン用のクラス */
 .slide-out {
   transform: translateX(-100%);
   opacity: 0;
@@ -199,7 +309,6 @@ h2 {
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
-/* バウンスエフェクト用 */
 .bounce-in {
   animation: bounce 0.5s ease forwards;
 }
