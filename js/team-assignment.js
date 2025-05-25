@@ -10,6 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const spectatorsList = document.getElementById('spectators-list');
 
   /**
+   * Saves the current player names from input fields to session storage.
+   */
+  function saveNamesToSessionStorage() {
+    if (!playerInputsContainer) {
+      // This check might be redundant if createPlayerInputs ensures it exists
+      // but good for safety if called from elsewhere.
+      console.error('Error: Player inputs container not found for saving to session storage!');
+      return;
+    }
+    const inputElements = playerInputsContainer.getElementsByTagName('input');
+    const namesArray = [];
+    for (let i = 0; i < inputElements.length; i++) {
+      namesArray.push(inputElements[i].value); // Store even empty strings to preserve order and count
+    }
+    sessionStorage.setItem('teamAssignmentPlayerNames', JSON.stringify(namesArray));
+  }
+
+  /**
    * Creates and appends player input fields to the DOM.
    */
   function createPlayerInputs() {
@@ -24,7 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
       input.id = `player-name-${i + 1}`; // Unique ID for each input
       input.style.display = 'block'; // Basic styling for separation
       input.style.marginBottom = '5px'; // Basic styling for separation
+      
+      // Add event listener to save names on input
+      input.addEventListener('input', saveNamesToSessionStorage);
+      
       playerInputsContainer.appendChild(input);
+    }
+    // After creating inputs, load any saved names
+    loadNamesFromSessionStorage();
+  }
+
+  /**
+   * Loads player names from session storage and populates the input fields.
+   */
+  function loadNamesFromSessionStorage() {
+    const savedNamesString = sessionStorage.getItem('teamAssignmentPlayerNames');
+    if (savedNamesString) {
+      try {
+        const savedNames = JSON.parse(savedNamesString);
+        if (Array.isArray(savedNames) && playerInputsContainer) {
+          const inputElements = playerInputsContainer.getElementsByTagName('input');
+          for (let i = 0; i < inputElements.length; i++) {
+            if (savedNames[i] !== undefined && savedNames[i] !== null) {
+              inputElements[i].value = savedNames[i];
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing saved player names from session storage:', e);
+      }
     }
   }
 
