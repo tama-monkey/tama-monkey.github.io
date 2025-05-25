@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チーム分け</title>
+  <link rel="stylesheet" href="./css/styles.css?v=1.1"> <!-- Include existing stylesheet with cache buster -->
+</head>
+<body>
+  <header>
+    <h1>チーム分け</h1>
+    <p>プレイヤー名を入力してチームを分けます。</p>
+  </header>
+
+  <nav>
+    <a href="index.html">大会概要</a>
+    <a href="skill-selection.html">スキル選択</a>
+    <a href="stage-selection.html">ステージ選択</a>
+    <a href="team-assignment.html">チーム分け</a> <!-- Active link -->
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+  </nav>
+  
+  <div class="container">
+    <h2>プレイヤー名入力</h2>
+    <p>8名から10名までのプレイヤー名を入力してください。</p>
+    <div id="player-inputs">
+      <!-- JavaScript will generate 10 input fields here -->
+    </div>
+    <button id="assignTeamsButton" class="random-button" style="margin-top: 20px;">チームを分ける</button>
+  </div>
+
+  <div class="container">
+    <h2>チーム結果</h2>
+    <div id="team-results">
+      <h3>チーム1</h3>
+      <ul id="team1-list"></ul>
+      <h3>チーム2</h3>
+      <ul id="team2-list"></ul>
+      <h3>観戦</h3>
+      <ul id="spectators-list"></ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 ３択ロース杯運営チーム</p>
+    <a href="index.html">トップページに戻る</a>
+  </footer>  
+  
+  <script src="js/main.js" defer></script> <!-- Existing main JS for dark mode etc. -->
+  <script src="js/team-assignment.js" defer></script> <!-- New JS for this page -->
+</body>
+</html>

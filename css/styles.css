@@ -357,3 +357,60 @@ h2 {
   50% { transform: translateX(-10%) scale(1.05); }
   100% { transform: translateX(0) scale(1); }
 }
+
+/* Styles for team-assignment.html inputs */
+#player-inputs input[type="text"] {
+  display: block;
+  width: calc(100% - 20px); /* Adjust width as needed, considering padding */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--choice-box-border, #ccc); /* Using a variable */
+  border-radius: 4px;
+  background-color: var(--bg-color, #fff); /* Using a variable */
+  color: var(--text-color, #333); /* Using a variable */
+  box-sizing: border-box;
+}
+
+.dark-mode #player-inputs input[type="text"] {
+  background-color: var(--choice-box-bg, #2c2c2c); /* Darker input background */
+  color: var(--text-color, #e0e0e0);
+  border-color: var(--choice-box-border, #444);
+}
+
+/* Styles for team-assignment.html results area */
+#team-results {
+  margin-top: 20px;
+}
+
+#team-results h3 {
+  color: var(--h2-color, #ff6347); /* Use existing variable for consistency */
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--choice-box-border, #ccc);
+  padding-bottom: 5px;
+}
+
+.dark-mode #team-results h3 {
+  color: var(--h2-color, #bb86fc);
+  border-bottom-color: var(--choice-box-border, #444);
+}
+
+#team-results ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#team-results li {
+  background-color: var(--choice-box-bg, #f9f9f9); /* Light background for list items */
+  color: var(--text-color, #333);
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--choice-box-border, #eee);
+}
+
+.dark-mode #team-results li {
+  background-color: var(--choice-box-bg, #2c2c2c); /* Darker list items */
+  color: var(--text-color, #e0e0e0);
+  border-color: var(--choice-box-border, #444);
+}
