@@ -127,6 +127,50 @@ nav {
   padding: 10px 0;
   text-align: center;
   transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* Hamburger Menu Button */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 25px;
+  height: 3px;
+  background-color: var(--nav-text);
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Animation for hamburger to X */
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Navigation Links Container */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 nav a {
@@ -310,6 +354,7 @@ h2 {
   color: var(--toggle-button-text);
   border: 1px solid var(--toggle-button-border);
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin: 0 15px;
 }
 
 #darkModeToggle:hover {
@@ -413,4 +458,47 @@ h2 {
   background-color: var(--choice-box-bg, #2c2c2c); /* Darker list items */
   color: var(--text-color, #e0e0e0);
   border-color: var(--choice-box-border, #444);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--nav-bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    gap: 30px;
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: var(--nav-text);
+  }
+
+  .nav-links #darkModeToggle {
+    font-size: 1.2em;
+    padding: 12px 20px;
+    margin: 10px 0;
+  }
+
+  /* Hide navigation links on mobile when not active */
+  nav a:not(.nav-links a) {
+    display: none;
+  }
 }
