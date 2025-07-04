@@ -1,0 +1,58 @@
+/* Optimized CSS for 3択ロース杯 Tournament App - Critical CSS Only */
+:root{--bg-color:#f4f4f9;--text-color:#333;--header-bg:linear-gradient(to right,#ff6347,#ffa500);--header-text:#fff;--nav-bg:#333;--nav-text:#fff;--link-color:#fff;--container-bg:#ffffff;--container-shadow:0 4px 8px rgba(0,0,0,0.1);--h2-color:#ff6347;--button-bg:#ff6347;--button-text:#fff;--choice-box-bg:#f3f3f3;--choice-box-border:#ddd;--choice-box-text:#333;--choice-box-hover-bg:#e1e1e1;--reset-btn-bg:#e74c3c;--reset-btn-text:#fff;--footer-bg:#f4f4f9;--footer-text:#333;--footer-link-color:#ff6347}
+
+.dark-mode{--bg-color:#121212;--text-color:#e0e0e0;--header-bg:linear-gradient(to right,#4A00E0,#8E2DE2);--header-text:#f0f0f0;--nav-bg:#1f1f1f;--nav-text:#e0e0e0;--link-color:#e0e0e0;--container-bg:#1e1e1e;--container-shadow:0 4px 8px rgba(0,0,0,0.4);--h2-color:#bb86fc;--button-bg:#6200ee;--button-text:#f0f0f0;--choice-box-bg:#2c2c2c;--choice-box-border:#444;--choice-box-text:#e0e0e0;--choice-box-hover-bg:#383838;--reset-btn-bg:#bb86fc;--reset-btn-text:#121212;--footer-bg:#1f1f1f;--footer-text:#c0c0c0;--footer-link-color:#bb86fc}
+
+body{font-family:Arial,sans-serif;margin:0;padding:0;line-height:1.6;background-color:var(--bg-color);color:var(--text-color);transition:background-color 0.3s ease,color 0.3s ease}
+
+header{background:var(--header-bg);color:var(--header-text);padding:20px 0;text-align:center;transition:background 0.3s ease,color 0.3s ease}
+
+h1{font-size:2.5em;margin:0;color:var(--header-text)}
+
+nav{background:var(--nav-bg);padding:10px 0;text-align:center;transition:background-color 0.3s ease;position:relative}
+
+.hamburger-menu{display:none;flex-direction:column;cursor:pointer;position:absolute;left:20px;top:50%;transform:translateY(-50%);z-index:1001}
+
+.hamburger-line{width:25px;height:3px;background-color:var(--nav-text);margin:3px 0;transition:0.3s;border-radius:2px}
+
+.hamburger-menu.active .hamburger-line:nth-child(1){transform:rotate(-45deg) translate(-5px,6px)}
+.hamburger-menu.active .hamburger-line:nth-child(2){opacity:0}
+.hamburger-menu.active .hamburger-line:nth-child(3){transform:rotate(45deg) translate(-5px,-6px)}
+
+.nav-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:15px}
+
+nav a{color:var(--link-color);text-decoration:none;margin:0 15px;font-size:1.2em;transition:color 0.3s ease}
+
+nav a:hover{text-decoration:underline}
+
+.container,.container2{max-width:600px;margin:20px auto;padding:20px;background-color:var(--container-bg);box-shadow:var(--container-shadow);border-radius:10px;transition:opacity 0.5s,background-color 0.3s ease,box-shadow 0.3s ease;position:relative;z-index:1}
+
+.container2{text-align:center}
+
+h2{font-size:1.8em;margin-bottom:20px;color:var(--h2-color);text-align:center;transition:color 0.3s ease}
+
+.choice-box{margin:12px 0;padding:15px;border:2px solid var(--choice-box-border);border-radius:12px;background:var(--choice-box-bg);color:var(--choice-box-text);box-shadow:0 4px 8px rgba(0,0,0,0.05);cursor:pointer;transition:background-color 0.3s ease,border-color 0.3s ease,color 0.3s ease}
+
+.choice-box:hover{background-color:var(--choice-box-hover-bg)}
+
+#reset-btn{display:block;height:90px;min-width:200px;max-width:440px;margin:60px auto;padding:20px;color:var(--reset-btn-text);font-size:1.2em;background:var(--reset-btn-bg);box-shadow:0 4px 8px rgba(0,0,0,0.1);border:1px solid var(--reset-btn-bg);border-radius:6px;cursor:pointer;transition:background-color 0.3s ease,color 0.3s ease}
+
+.footer{padding:20px;text-align:center;background-color:var(--footer-bg);color:var(--footer-text);margin-top:30px;transition:background-color 0.3s ease,color 0.3s ease}
+
+.footer a{color:var(--footer-link-color);text-decoration:none;transition:color 0.3s ease}
+
+.footer a:hover{text-decoration:underline}
+
+/* Critical animations only */
+.fade-out{opacity:0;transition:opacity 0.5s ease}
+.slide-out{transform:translateX(-100%);opacity:0;transition:transform 0.5s ease,opacity 0.5s ease}
+
+/* Mobile critical styles */
+@media (max-width:768px){
+  .hamburger-menu{display:flex}
+  .nav-links{position:fixed;top:0;left:-100%;width:100%;height:100vh;background-color:var(--nav-bg);flex-direction:column;justify-content:center;align-items:center;transition:left 0.3s ease;z-index:1000;gap:30px}
+  .nav-links.active{left:0}
+  .nav-links a{font-size:1.5em;margin:10px 0;color:var(--nav-text)}
+  h1{font-size:2em}
+  .container,.container2{margin:10px;padding:15px}
+}

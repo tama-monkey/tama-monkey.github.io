@@ -10,7 +10,18 @@ let resetButtonDisabledUntil = Date.now() + coolTime; // リセットボタン�
 // 初期化
 loadPreviousSelections();
 initializeState();
-setInterval(updateResetButtonCountdown, 100);
+// Use requestAnimationFrame for better performance instead of setInterval
+function startResetButtonCountdown() {
+  function loop() {
+    updateResetButtonCountdown();
+    const remainingTime = Math.max(0, resetButtonDisabledUntil - Date.now());
+    if (remainingTime > 0) {
+      requestAnimationFrame(loop);
+    }
+  }
+  requestAnimationFrame(loop);
+}
+startResetButtonCountdown();
 displayChoices();
 
 // セッションストレージからステージ情報を読み込む
@@ -124,12 +135,14 @@ function selectChoice(choiceDiv, choice) {
   // 選択したスキルを表に追加
   updateSelectionsDisplay();
 
-  document.querySelectorAll('.choice-box').forEach(box => {
+  // Cache DOM query for better performance
+  const choiceBoxes = document.querySelectorAll('.choice-box');
+  choiceBoxes.forEach(box => {
     box.style.pointerEvents = "none";
   });
 
   // 選ばれていない選択肢にフェードアウトクラスを追加
-  document.querySelectorAll('.choice-box').forEach(box => {
+  choiceBoxes.forEach(box => {
     if (box !== choiceDiv) {
       box.classList.add('fade-out');
     }
@@ -165,13 +178,15 @@ function selectChoice(choiceDiv, choice) {
     }
 
     // フェードアウトした選択肢を非表示にする
-    document.querySelectorAll('.choice-box.fade-out').forEach(box => {
+    const fadeOutBoxes = document.querySelectorAll('.choice-box.fade-out');
+    fadeOutBoxes.forEach(box => {
       box.style.display = "none";
       box.classList.remove('fade-out'); // 次の選択に備えてクラスをリセット
     });
 
     // 選択肢がスライドアウトした後、すべてのchoice-boxを再度クリック可能にする
-    document.querySelectorAll('.choice-box').forEach(box => {
+    const allChoiceBoxes = document.querySelectorAll('.choice-box');
+    allChoiceBoxes.forEach(box => {
       box.style.pointerEvents = "auto";
     });
   }, 250); // スライドアウトの時間に合わせて待機

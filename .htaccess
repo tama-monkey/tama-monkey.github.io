@@ -1,0 +1,76 @@
+# Performance Optimization .htaccess file
+# For 3択ロース杯 Tournament Management Application
+
+# Enable compression
+<IfModule mod_deflate.c>
+    # Enable compression for text files
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    
+    # Remove browser bugs (optional)
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent
+</IfModule>
+
+# Expire headers for browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images - 1 year
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS and JavaScript - 1 month
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    
+    # HTML files - 1 hour (for content updates)
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # Default - 1 week
+    ExpiresDefault "access plus 1 week"
+</IfModule>
+
+# Cache-Control headers
+<IfModule mod_headers.c>
+    # Static assets - long cache
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|webp|svg|css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # HTML files - short cache but revalidate
+    <FilesMatch "\.html$">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </FilesMatch>
+    
+    # Security headers for performance
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Enable Keep-Alive for faster loading
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+
+# Remove ETags (optional - when using Cache-Control)
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
