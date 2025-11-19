@@ -7,11 +7,21 @@ let previousSelection = null; // リセット前の選択を保存
 let coolTime = 90000; // リセットボタンのクールタイム(ms)
 let resetButtonDisabledUntil = Date.now() + coolTime; // リセットボタンの無効化管理
 
-// 初期化
-loadPreviousSelections();
-initializeState();
-setInterval(updateResetButtonCountdown, 100);
-displayChoices();
+// スキル選択の初期化と実行
+function initSkillSelection() {
+  // 初期化
+  loadPreviousSelections();
+  initializeState();
+  setInterval(updateResetButtonCountdown, 100);
+  displayChoices();
+}
+
+// ページの読み込みが完了したら、ブキデータを取得してからスキル選択を開始
+document.addEventListener('DOMContentLoaded', async () => {
+  await fetchWeaponData();
+  initSkillSelection();
+});
+
 
 // セッションストレージからステージ情報を読み込む
 function initializeState() {
