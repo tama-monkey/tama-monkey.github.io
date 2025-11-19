@@ -24,13 +24,17 @@ async function fetchWeaponData() {
     const response = await fetch('https://stat.ink/api/v3/weapon');
     const data = await response.json();
     // ブキ名（日本語）のリストを抽出
-    const weaponNames = data.map(weapon => weapon.name.ja_JP);
+    const weapons = data.map(weapon => ({
+      name: weapon.name.ja_JP,
+      sub: weapon.sub.name.ja_JP,
+      special: weapon.special.name.ja_JP
+    }));
     // データベースのブキリストを更新
-    database["ブキ"] = weaponNames;
+    database["ブキ"] = weapons;
     console.log('ブキデータの取得と更新が完了しました。');
   } catch (error) {
     console.error('ブキデータの取得に失敗しました:', error);
     // エラー発生時は、代替テキストでブキリストを初期化
-    database["ブキ"] = ["ブキデータの取得に失敗しました"];
+    database["ブキ"] = [{ name: "ブキデータの取得に失敗しました", sub: "", special: "" }];
   }
 }

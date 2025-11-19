@@ -98,8 +98,10 @@
   --toggle-button-hover-bg: #383838;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
 body {
-  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -282,6 +284,21 @@ h2 {
   color: var(--choice-box-disabled-text);
   border-color: var(--choice-box-border); /* Keep border consistent or use a disabled border var */
   cursor: not-allowed;
+}
+
+.weapon-name {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.weapon-details {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.dark-mode .weapon-details {
+  color: #aaa;
 }
 
 #reset-btn {

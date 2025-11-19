@@ -70,7 +70,15 @@ function loadPreviousSelections() {
 function getRandomChoices() {
   const currentStep = steps[currentStepIndex];
   const items = database[currentStep];
-  const unselectedItems = items.filter(item => !userSelections[currentStep]?.includes(item)); // 選ばれたものを除外
+
+  const selectedItems = userSelections[currentStep] || [];
+  let unselectedItems;
+
+  if (currentStep === "ブキ") {
+    unselectedItems = items.filter(item => !selectedItems.includes(item.name));
+  } else {
+    unselectedItems = items.filter(item => !selectedItems.includes(item));
+  }
 
   // シャッフル処理
   for (let i = unselectedItems.length - 1; i > 0; i--) {
@@ -107,8 +115,19 @@ function displayChoices() {
     choices.forEach(choice => {
       const choiceDiv = document.createElement("div");
       choiceDiv.className = "choice-box bounce-in";
-      choiceDiv.textContent = choice;
-      choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
+
+      if (currentStep === "ブキ") {
+        choiceDiv.innerHTML = `
+          <div class="weapon-name">${choice.name}</div>
+          <div class="weapon-details">サブ: ${choice.sub}</div>
+          <div class="weapon-details">スペシャル: ${choice.special}</div>
+        `;
+        choiceDiv.onclick = () => selectChoice(choiceDiv, choice.name);
+      } else {
+        choiceDiv.textContent = choice;
+        choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
+      }
+
       choicesContainer.appendChild(choiceDiv);
       choicesContainer.querySelectorAll('.choice-box').forEach(box => {
         box.addEventListener('animationend', () => {
