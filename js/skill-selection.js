@@ -7,11 +7,21 @@ let previousSelection = null; // リセット前の選択を保存
 let coolTime = 90000; // リセットボタンのクールタイム(ms)
 let resetButtonDisabledUntil = Date.now() + coolTime; // リセットボタンの無効化管理
 
-// 初期化
-loadPreviousSelections();
-initializeState();
-setInterval(updateResetButtonCountdown, 100);
-displayChoices();
+// スキル選択の初期化と実行
+function initSkillSelection() {
+  // 初期化
+  loadPreviousSelections();
+  initializeState();
+  setInterval(updateResetButtonCountdown, 100);
+  displayChoices();
+}
+
+// ページの読み込みが完了したら、ブキデータを取得してからスキル選択を開始
+document.addEventListener('DOMContentLoaded', async () => {
+  await fetchWeaponData();
+  initSkillSelection();
+});
+
 
 // セッションストレージからステージ情報を読み込む
 function initializeState() {
@@ -60,7 +70,15 @@ function loadPreviousSelections() {
 function getRandomChoices() {
   const currentStep = steps[currentStepIndex];
   const items = database[currentStep];
-  const unselectedItems = items.filter(item => !userSelections[currentStep]?.includes(item)); // 選ばれたものを除外
+
+  const selectedItems = userSelections[currentStep] || [];
+  let unselectedItems;
+
+  if (currentStep === "ブキ") {
+    unselectedItems = items.filter(item => !selectedItems.includes(item.name));
+  } else {
+    unselectedItems = items.filter(item => !selectedItems.includes(item));
+  }
 
   // シャッフル処理
   for (let i = unselectedItems.length - 1; i > 0; i--) {
@@ -97,8 +115,19 @@ function displayChoices() {
     choices.forEach(choice => {
       const choiceDiv = document.createElement("div");
       choiceDiv.className = "choice-box bounce-in";
-      choiceDiv.textContent = choice;
-      choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
+
+      if (currentStep === "ブキ") {
+        choiceDiv.innerHTML = `
+          <div class="weapon-name">${choice.name}</div>
+          <div class="weapon-details">サブ: ${choice.sub}</div>
+          <div class="weapon-details">スペシャル: ${choice.special}</div>
+        `;
+        choiceDiv.onclick = () => selectChoice(choiceDiv, choice.name);
+      } else {
+        choiceDiv.textContent = choice;
+        choiceDiv.onclick = () => selectChoice(choiceDiv, choice);
+      }
+
       choicesContainer.appendChild(choiceDiv);
       choicesContainer.querySelectorAll('.choice-box').forEach(box => {
         box.addEventListener('animationend', () => {
