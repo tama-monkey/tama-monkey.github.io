@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>３択ロース杯</title>
   <link rel="stylesheet" href="./css/styles.css?v=1.1">
+  <link rel="stylesheet" href="./css/filter.css?v=1.0">
 </head>
 
 <body>
@@ -29,6 +30,9 @@
   </nav>
   
   <div class="container">
+    <div style="text-align: right;">
+      <button id="filter-btn" class="filter-btn">絞り込み</button>
+    </div>
     <h2>スキル選択</h1>
     <div id="step">現在のステップ：<span id="current-step">ブキ</span></div>
     <div id="choices"></div>
@@ -36,6 +40,53 @@
 
     <h3>選んだスキル</h2>
     <div id="selections-container"></div>
+  </div>
+
+  <!-- Filter Modal -->
+  <div id="filter-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>絞り込み</h2>
+      <div class="filter-tabs">
+        <button class="tab-link active" data-tab="filter-weapon">ブキ</button>
+        <button class="tab-link" data-tab="filter-head">アタマ</button>
+        <button class="tab-link" data-tab="filter-clothes">フク</button>
+        <button class="tab-link" data-tab="filter-shoes">クツ</button>
+      </div>
+
+      <div id="filter-weapon" class="tab-content active">
+        <div class="filter-controls">
+          <button class="control-btn" id="btn-all-weapon">全選択</button>
+          <button class="control-btn" id="btn-none-weapon">全解除</button>
+        </div>
+        <div id="list-weapon" class="checkbox-list"></div>
+      </div>
+      <div id="filter-head" class="tab-content">
+        <div class="filter-controls">
+          <button class="control-btn" id="btn-all-head">全選択</button>
+          <button class="control-btn" id="btn-none-head">全解除</button>
+        </div>
+        <div id="list-head" class="checkbox-list"></div>
+      </div>
+      <div id="filter-clothes" class="tab-content">
+        <div class="filter-controls">
+          <button class="control-btn" id="btn-all-clothes">全選択</button>
+          <button class="control-btn" id="btn-none-clothes">全解除</button>
+        </div>
+        <div id="list-clothes" class="checkbox-list"></div>
+      </div>
+      <div id="filter-shoes" class="tab-content">
+        <div class="filter-controls">
+          <button class="control-btn" id="btn-all-shoes">全選択</button>
+          <button class="control-btn" id="btn-none-shoes">全解除</button>
+        </div>
+        <div id="list-shoes" class="checkbox-list"></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button id="close-filter-btn" class="close-btn">閉じる</button>
+      </div>
+    </div>
   </div>
 
   <footer class="footer">

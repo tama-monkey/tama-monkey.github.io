@@ -7,12 +7,24 @@ let previousSelection = null; // リセット前の選択を保存
 let coolTime = 90000; // リセットボタンのクールタイム(ms)
 let resetButtonDisabledUntil = Date.now() + coolTime; // リセットボタンの無効化管理
 
+// フィルタリングの状態管理
+// 初期状態は全て選択（フィルタなし）とみなすか、除外リストを持つか
+// ここでは「除外されたアイテムのリスト」を持つ方式にします。
+// キーは "ブキ", "アタマ", "フク", "クツ"
+let excludedItems = {
+  "ブキ": [],
+  "アタマ": [],
+  "フク": [],
+  "クツ": []
+};
+
 // スキル選択の初期化と実行
 function initSkillSelection() {
   // 初期化
   loadPreviousSelections();
   initializeState();
   setInterval(updateResetButtonCountdown, 100);
+  initFilterMenu(); // フィルターメニューの初期化
   displayChoices();
 }
 
@@ -20,6 +32,7 @@ function initSkillSelection() {
 document.addEventListener('DOMContentLoaded', async () => {
   await fetchWeaponData();
   initSkillSelection();
+  setupFilterEvents(); // フィルター関連のイベントリスナー設定
 });
 
 
@@ -72,21 +85,50 @@ function getRandomChoices() {
   const items = database[currentStep];
 
   const selectedItems = userSelections[currentStep] || [];
-  let unselectedItems;
+  const excluded = excludedItems[currentStep] || [];
+
+  let candidates;
 
   if (currentStep === "ブキ") {
-    unselectedItems = items.filter(item => !selectedItems.includes(item.name));
+    // 選択済みでなく、かつ除外リストに含まれていないもの
+    candidates = items.filter(item =>
+      !selectedItems.includes(item.name) && !excluded.includes(item.name)
+    );
   } else {
-    unselectedItems = items.filter(item => !selectedItems.includes(item));
+    candidates = items.filter(item =>
+      !selectedItems.includes(item) && !excluded.includes(item)
+    );
+  }
+
+  // 候補が3つ未満の場合は、除外リストを無視して候補を増やす（警告するか、そのまま出すか）
+  // ここでは、候補が足りない場合は除外リストを無視するフォールバックを入れる
+  if (candidates.length < 3) {
+    console.warn("候補が足りないため、フィルターを一部無視します");
+    let additionalCandidates;
+    if (currentStep === "ブキ") {
+      additionalCandidates = items.filter(item =>
+        !selectedItems.includes(item.name) && excluded.includes(item.name)
+      );
+    } else {
+      additionalCandidates = items.filter(item =>
+        !selectedItems.includes(item) && excluded.includes(item)
+      );
+    }
+    // 足りない分だけ追加
+    while (candidates.length < 3 && additionalCandidates.length > 0) {
+      const randomIndex = Math.floor(Math.random() * additionalCandidates.length);
+      candidates.push(additionalCandidates[randomIndex]);
+      additionalCandidates.splice(randomIndex, 1);
+    }
   }
 
   // シャッフル処理
-  for (let i = unselectedItems.length - 1; i > 0; i--) {
+  for (let i = candidates.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [unselectedItems[i], unselectedItems[j]] = [unselectedItems[j], unselectedItems[i]];
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
   }
 
-  return unselectedItems.slice(0, 3); // 最初の3つを取得
+  return candidates.slice(0, 3); // 最初の3つを取得
 }
 
 // 選択肢を表示
@@ -298,4 +340,151 @@ function resetSelections() {
 
   container.classList.remove('slide-out');
   container.classList.remove('bounce-in');
+}
+
+/* --- Filter Logic --- */
+
+function setupFilterEvents() {
+  const modal = document.getElementById("filter-modal");
+  const btn = document.getElementById("filter-btn");
+  const closeSpan = document.querySelector(".close-modal");
+  const closeBtn = document.getElementById("close-filter-btn");
+
+  // Open modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // Close modal
+  closeSpan.onclick = function() {
+    modal.style.display = "none";
+    // 閉じるタイミングで再抽選はしないが、次回抽選時に反映される
+    // もし即時反映したいならここで displayChoices() を呼ぶなどするが、
+    // 現在のステップがすでに表示されているので、次回更新時から有効で良いとする
+  }
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Click outside to close
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // Tab switching
+  const tabLinks = document.querySelectorAll(".tab-link");
+  tabLinks.forEach(link => {
+    link.onclick = (e) => {
+      openTab(e, link.getAttribute("data-tab"));
+    };
+  });
+
+  // Select All / None buttons
+  document.getElementById("btn-all-weapon").onclick = () => toggleAll("ブキ", true);
+  document.getElementById("btn-none-weapon").onclick = () => toggleAll("ブキ", false);
+
+  document.getElementById("btn-all-head").onclick = () => toggleAll("アタマ", true);
+  document.getElementById("btn-none-head").onclick = () => toggleAll("アタマ", false);
+
+  document.getElementById("btn-all-clothes").onclick = () => toggleAll("フク", true);
+  document.getElementById("btn-none-clothes").onclick = () => toggleAll("フク", false);
+
+  document.getElementById("btn-all-shoes").onclick = () => toggleAll("クツ", true);
+  document.getElementById("btn-none-shoes").onclick = () => toggleAll("クツ", false);
+}
+
+function openTab(evt, tabName) {
+  const tabContent = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < tabContent.length; i++) {
+    tabContent[i].style.display = "none";
+    tabContent[i].classList.remove("active");
+  }
+
+  const tabLinks = document.getElementsByClassName("tab-link");
+  for (let i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(tabName).style.display = "block";
+  document.getElementById(tabName).classList.add("active");
+  evt.currentTarget.className += " active";
+}
+
+function initFilterMenu() {
+  // Generate checkboxes for each category
+  createCheckboxes("ブキ", "list-weapon");
+  createCheckboxes("アタマ", "list-head");
+  createCheckboxes("フク", "list-clothes");
+  createCheckboxes("クツ", "list-shoes");
+}
+
+function createCheckboxes(category, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  const items = database[category];
+
+  items.forEach((item, index) => {
+    const itemName = (category === "ブキ") ? item.name : item;
+
+    const div = document.createElement("div");
+    div.className = "checkbox-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `filter-${category}-${index}`;
+    checkbox.checked = true; // Default all checked
+    checkbox.dataset.category = category;
+    checkbox.dataset.item = itemName;
+
+    // Change event
+    checkbox.onchange = (e) => {
+      updateExcludedItems(category, itemName, e.target.checked);
+    };
+
+    const label = document.createElement("label");
+    label.htmlFor = `filter-${category}-${index}`;
+    label.textContent = itemName;
+
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    container.appendChild(div);
+  });
+}
+
+function updateExcludedItems(category, itemName, isChecked) {
+  if (isChecked) {
+    // Remove from excluded
+    excludedItems[category] = excludedItems[category].filter(i => i !== itemName);
+  } else {
+    // Add to excluded if not present
+    if (!excludedItems[category].includes(itemName)) {
+      excludedItems[category].push(itemName);
+    }
+  }
+}
+
+function toggleAll(category, checkState) {
+  // Update UI
+  const containerId = (category === "ブキ") ? "list-weapon" :
+                      (category === "アタマ") ? "list-head" :
+                      (category === "フク") ? "list-clothes" : "list-shoes";
+
+  const container = document.getElementById(containerId);
+  const checkboxes = container.querySelectorAll("input[type='checkbox']");
+
+  checkboxes.forEach(cb => {
+    cb.checked = checkState;
+  });
+
+  // Update State
+  if (checkState) {
+    // Clear excluded list (all allowed)
+    excludedItems[category] = [];
+  } else {
+    // Add all to excluded list
+    const items = database[category];
+    excludedItems[category] = items.map(item => (category === "ブキ") ? item.name : item);
+  }
 }
